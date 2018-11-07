@@ -1,0 +1,42 @@
+<div class="egwk-synch">
+  <ng-container *ngIf="!loading && book">
+    <div *ngFor="let paragraph of book.original; let i = index"
+         [id]="'egwk-synch-row-' + paragraph.para_id"
+         class="egwk-synch-row"
+         (click)="activate(paragraph.para_id)"
+         [ngClass]="active === paragraph.para_id ? 'active' : ''"
+    >
+      <div class="egwk-translation-tools">
+        <span class="egwk-translation-tools-button" (click)="mergeUp(i)">
+          <mat-icon>merge_type</mat-icon>
+        </span>
+        <span class="egwk-translation-tools-button upside-down" (click)="mergeDown(i)">
+          <mat-icon>merge_type</mat-icon>
+        </span>
+        <span class="egwk-translation-tools-button" (click)="insert(i)">
+          <mat-icon>add</mat-icon>
+        </span>
+        <span class="egwk-translation-tools-button upside-down" (click)="cut(i)">
+          <mat-icon>call_split</mat-icon>
+        </span>
+        <span class="egwk-translation-tools-button" (click)="delete(i)">
+          <mat-icon class="delete">delete</mat-icon>
+        </span>
+      </div>
+      <div class="egwk-original egwk-synch-column">
+        <span [class]="paragraph.element_type" [innerHTML]="paragraph.content"></span>
+        <span class="egwk-refcode">{{ paragraph.refcode_short }} [ {{ paragraph.para_id }} ]</span>
+      </div>
+      <div class="egwk-synch-prop" [ngStyle]="{'background-color': propColor(paragraph.content, book.translation[i])}">
+        {{ prop(paragraph.content, book.translation[i]) }}%
+      </div>
+      <div class="egwk-translation egwk-synch-column">
+        <span [class]="paragraph.element_type" (dblclick)="selectCutPosition(i, paragraph.para_id)">{{ book.translation[i] }}</span>
+        <span class="egwk-refcode">{{ paragraph.refcode_short }}</span>
+      </div>
+    </div>
+  </ng-container>
+  <div *ngIf="loading">
+    loading...
+  </div>
+</div>

@@ -1,0 +1,107 @@
+@import '../../colors';
+
+.egwk-synch {
+  margin-top: 32px;
+  padding: 10px;
+}
+
+.egwk-original {
+  .h1, .h2, .h3, .h4, .h5, .h6 {
+    font-weight: bold;
+  }
+  .h1 {
+    font-size: 1.5rem;
+  }
+  .h2 {
+    font-size: 1.4rem;
+  }
+  .h3 {
+    font-size: 1.3rem;
+  }
+  .h4 {
+    font-size: 1.2rem;
+  }
+}
+
+.egwk-synch-row {
+  display: flex;
+  padding: 16px 16px 32px 16px;
+  position: relative;
+
+  .egwk-synch-column {
+    flex: 50%;
+    position: relative;
+    &.egwk-original {
+      padding-right: 16px;
+    }
+    &.egwk-translation {
+      padding-left: 16px;
+    }
+  }
+
+  .egwk-translation-tools {
+    display: none;
+    background-color: $egwk-gray;
+    color: $egwk-white;
+    position: absolute;
+    top: -46px;
+    right: -1px;
+    text-align: right;
+    line-height: 24px;
+    .egwk-translation-tools-button {
+      cursor: pointer;
+      padding: 8px;
+    }
+    .egwk-translation-tools-button:hover {
+      background-color: #ffffff33;
+    }
+    .mat-icon {
+      padding: 0 8px;
+      &.delete {
+        color: $egwk-danger-light;
+      }
+    }
+  }
+
+  &.active {
+    padding: 15px 15px 8px 15px;
+    border: 1px solid $egwk-gray;
+    border-bottom: 24px solid $egwk-gray;
+
+    .egwk-refcode {
+      right: 1px;
+      color: $egwk-white;
+    }
+    .egwk-translation-tools {
+      display: flex;
+    }
+
+    .egwk-synch-column {
+      flex: 50%;
+      &.egwk-original {
+        padding-right: 15px;
+        border-right: 1px solid $egwk-gray-80;
+      }
+    }
+
+  }
+
+  .egwk-refcode {
+    position: absolute;
+    color: $egwk-black;
+    bottom: -32px;
+    margin-right: 20px;
+    right: 2px;
+    font-size: 0.75rem;
+
+  }
+}
+
+.egwk-synch-prop {
+  width: 50px;
+  font-size: 0.7rem;
+  text-align: center;
+  font-family: monospace;
+  color: $egwk-white;
+  text-shadow: 0 0 8px $egwk-black;
+}

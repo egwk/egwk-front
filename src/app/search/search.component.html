@@ -1,0 +1,15 @@
+<div class="flex-center position-ref full-height">
+  <div class="egwk-search">
+    <input type="text" #query/>
+
+    <ul class="links">
+      Search in:
+      <li><a (click)="search($event, 'writings', query.value)">Writings</a></li>
+      <li><a (click)="search($event, 'merged', query.value)">Merged</a></li>
+      <li><a (click)="search($event, 'extended', query.value)">Extended</a></li>
+      <li><a (click)="search($event, 'bible', query.value)">Bible</a></li>
+      <li><a (click)="search($event, 'hymnal', query.value)">Hymnal</a></li>
+      <li><a (click)="search($event, 'ssq', query.value)">SSQ</a></li>
+    </ul>
+  </div>
+</div>

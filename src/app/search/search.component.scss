@@ -1,0 +1,16 @@
+.egwk-search {
+  margin: 30px;
+  text-align: center;
+  input {
+    width: 90%;
+    font-size: 1.8rem;
+    border-radius: 16px;
+    border: 1px solid #636b6f80;
+    outline: none;
+    padding: 16px;
+    &:focus {
+      box-shadow: 0px 0px 24px -6px rgba(0, 0, 0, 0.33);
+    }
+  }
+}
+

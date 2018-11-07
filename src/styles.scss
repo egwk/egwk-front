@@ -1,0 +1,131 @@
+@import url('https://fonts.googleapis.com/css?family=Raleway:300,400,600');
+@import 'colors.scss';
+
+/* Fonts */
+@font-face {
+  font-family: 'Material Icons';
+  font-style: normal;
+  font-weight: 400;
+  src: url(/assets/fonts/MaterialIcons-Regular.eot); /* For IE6-8 */
+  src: local('Material Icons'),
+  local('MaterialIcons-Regular'),
+  url(/assets/fonts/MaterialIcons-Regular.woff2) format('woff2'),
+  url(/assets/fonts/MaterialIcons-Regular.woff) format('woff'),
+  url(/assets/fonts/MaterialIcons-Regular.ttf) format('truetype');
+}
+
+.material-icons {
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px; /* Preferred icon size */
+  display: inline-block;
+  line-height: 1;
+  text-transform: none;
+  letter-spacing: normal;
+  word-wrap: normal;
+  white-space: nowrap;
+  direction: ltr;
+
+  /* Support for all WebKit browsers. */
+  -webkit-font-smoothing: antialiased;
+  /* Support for Safari and Chrome. */
+  text-rendering: optimizeLegibility;
+
+  /* Support for Firefox. */
+  -moz-osx-font-smoothing: grayscale;
+
+  /* Support for IE. */
+  font-feature-settings: 'liga';
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  background-color: $egwk-white;
+  color: $egwk-gray;
+  font-family: 'Raleway', sans-serif;
+  font-weight: 100;
+  height: 100vh;
+  font-size: 14pt;
+  line-height: 1.5em;
+}
+
+a {
+  color: $egwk-base;
+  &:hover {
+    color: $egwk-base-lighter;
+    cursor: pointer;
+  }
+}
+
+.full-height {
+  height: 100vh;
+}
+
+.flex-center {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
+.position-ref {
+  position: relative;
+}
+
+nav.top-right {
+  position: absolute;
+  right: 0px;
+  top: 18px;
+  margin-left: 48px;
+}
+
+.links {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  display: flex;
+  justify-content: flex-end;
+  flex-flow: row wrap;
+  li {
+    padding: 0 8px;
+    a {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: .1rem;
+      text-decoration: none;
+      text-transform: uppercase;
+    }
+    input[type='text'] {
+      border-radius: 16px;
+      border: 1px solid $egwk-gray-80;
+      outline: none;
+      padding: 8px;
+      width: 32px;
+      transition: width 0.125s ease-in-out;
+      &:focus {
+        width: 160px;
+      }
+    }
+  }
+}
+
+#watermark {
+  background: url('./assets/images/egw_signo-ocean-side.svg') no-repeat;
+  background-size: 60px;
+  background-repeat: no-repeat;
+  background-position-y: center;
+  background-position-x: 8px;
+  width: 100px;
+  height: 70px;
+  position: relative;
+  top: 0;
+  left: 0;
+}
+
+.upside-down{
+  transform: rotate(180deg);
+}

@@ -1,2 +1,5 @@
-# egwk-front
-EGWK Front-end Application (Angular)
+# EGWK Front-end Application
+Features:
+- search
+- read
+- synch

@@ -31,7 +31,7 @@
         {{ prop(paragraph.content, book.translation[i]) }}%
       </div>
       <div class="egwk-translation egwk-synch-column">
-        <span [class]="paragraph.element_type" (dblclick)="selectCutPosition(i, paragraph.para_id)">{{ book.translation[i] }}</span>
+        <span [class]="paragraph.element_type">{{ book.translation[i] }}</span>
         <span class="egwk-refcode">{{ paragraph.refcode_short }}</span>
       </div>
     </div>

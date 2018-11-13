@@ -1,15 +1,81 @@
-<div class="flex-center position-ref full-height">
-  <div class="egwk-search">
-    <input type="text" #query/>
+<div class="egwk-search">
+  <div [ngClass]="{'flex-center': true, 'position-ref': true,  'full-height': result === undefined}">
 
-    <ul class="links">
-      Search in:
-      <li><a (click)="search($event, 'writings', query.value)">Writings</a></li>
-      <li><a (click)="search($event, 'merged', query.value)">Merged</a></li>
-      <li><a (click)="search($event, 'extended', query.value)">Extended</a></li>
-      <li><a (click)="search($event, 'bible', query.value)">Bible</a></li>
-      <li><a (click)="search($event, 'hymnal', query.value)">Hymnal</a></li>
-      <li><a (click)="search($event, 'ssq', query.value)">SSQ</a></li>
-    </ul>
+    <div class="egwk-search-form">
+
+      <input type="text" #query value="jesus loves to have us"/>
+      <div>
+        <p>
+          Covers: <span class="slider-percentage">{{ settings.covers }}%</span>
+          <mat-slider
+            min="0" max="100" step="5" value="50"
+            [thumbLabel]="true"
+            [(ngModel)]="settings.covers"
+            (ngModelChange)="covers($event)"
+          ></mat-slider>
+          Covered: <span class="slider-percentage">{{ settings.covered }}%</span>
+          <mat-slider
+            min="0" max="100" step="5" value="50"
+            [thumbLabel]="true"
+            [(ngModel)]="settings.covered"
+            (ngModelChange)="covered($event)"
+            [disabled]="settings.equalCoverage"
+          ></mat-slider>
+          <mat-slide-toggle
+            [(ngModel)]="settings.equalCoverage"
+            (ngModelChange)="equalCoverage($event)"></mat-slide-toggle>
+        </p>
+      </div>
+      <span>Search in:</span>
+      <ul class="links">
+        <li><a (click)="search('writings', query.value)">Writings</a></li>
+        <li><a (click)="search('merged', query.value)">Merged</a></li>
+        <li><a (click)="search('extended', query.value)">Extended</a></li>
+        <li><a (click)="search('bible', query.value)">Bible</a></li>
+        <li><a (click)="search('hymnal', query.value)">Hymnal</a></li>
+        <li><a (click)="search('ssq', query.value)">SSQ</a></li>
+      </ul>
+
+    </div>
+
   </div>
+
+  <div class="egwk-search-results flex-center position-ref full-height" *ngIf="result === null">loading...</div>
+
+  <ol class="egwk-search-results" *ngIf="result">
+    <li class="egwk-search-result" *ngFor="let item of result?.data">
+
+      <search-tools
+        [result]="item"
+        [settings]="settings"
+        [similars]="similars"
+        [showSimilars]="showSimilars"></search-tools>
+
+      <search-paragraph
+        [paragraph]="item.self"
+        [settings]="settings"
+        (useAsReference)="useAsReference($event)"
+        [currentQuery]="currentQuery"></search-paragraph>
+
+      <ng-container *ngIf="(showSimilars(item.self.para_id) || settings.showSimilarsDefault) && item.similars">
+
+        <ol class="egwk-search-results">
+          <li class="egwk-search-result" *ngFor="let similar of item.similars">
+
+            <search-paragraph
+              [paragraph]="similar.paragraph"
+              [similarity]="similar.similarity"
+              [parent]="item.self"
+              [settings]="settings"
+              (useAsReference)="useAsReference($event)"
+              [currentQuery]="currentQuery"></search-paragraph>
+
+          </li>
+        </ol>
+
+      </ng-container>
+
+    </li>
+  </ol>
+
 </div>

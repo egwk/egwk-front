@@ -1,0 +1,24 @@
+.egwk-search-result-book-title {
+  font-size: 1.1rem;
+  font-weight: bold;
+}
+
+.egwk-search-result-chapter-title {
+  font-size: 1.1rem;
+}
+
+.egwk-refcode {
+}
+
+.egwk-search-result-coverage {
+  font-family: monospace;
+  font-size: 0.75rem;
+}
+
+.egwk-search-tools-button {
+  user-select: none;
+  cursor: pointer;
+  & .mat-icon {
+    vertical-align: middle;
+  }
+}

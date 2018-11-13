@@ -1,0 +1,10 @@
+.egwk-search-tools-button {
+  user-select: none;
+  cursor: pointer;
+& .mat-icon {
+    vertical-align: middle;
+  }
+&.active .mat-icon{
+   transform: rotate(180deg);
+ }
+}

@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Raleway:300,400,600');
+@import "../node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css";
 @import 'colors.scss';
 
 /* Fonts */
@@ -55,9 +56,9 @@ html, body {
 }
 
 a {
-  color: $egwk-base;
+  color: $egwk-primary;
   &:hover {
-    color: $egwk-base-lighter;
+    color: $egwk-primary-lighter;
     cursor: pointer;
   }
 }
@@ -73,7 +74,7 @@ a {
 }
 
 .position-ref {
-  position: relative;
+  // position: relative;
 }
 
 nav.top-right {
@@ -126,6 +127,31 @@ nav.top-right {
   left: 0;
 }
 
-.upside-down{
+.upside-down {
   transform: rotate(180deg);
 }
+
+.search-highlight {
+  background-color: $egwk-primary;
+  color: $egwk-white;
+}
+
+.no-select {
+  user-select: none;
+}
+
+del {
+  text-decoration: none;
+  background-color: $egwk-danger-lighter;
+}
+
+ins {
+  text-decoration: none;
+  background-color: $egwk-primary-lighter;
+}
+
+.slider-percentage {
+  width: 50px;
+  display: inline-block;
+}
+

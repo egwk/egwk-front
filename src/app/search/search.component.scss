@@ -1,4 +1,18 @@
+@import '../../colors.scss';
+
 .egwk-search {
+  margin: 0px 40px 30px 40px;
+}
+
+.egwk-search-results {
+  margin: 0 10% 0 10%;
+}
+
+.egwk-search-result {
+  margin: 5% 0 5% 0;
+}
+
+.egwk-search-form {
   margin: 30px;
   text-align: center;
   input {
@@ -13,4 +27,3 @@
     }
   }
 }
-

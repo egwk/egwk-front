@@ -1,0 +1,19 @@
+<span class="egwk-search-tools">
+  <span
+    [ngClass]="{'egwk-search-tools-button': true, 'active': (showSimilars(result.self.para_id) || settings.showSimilarsDefault)}"
+    (click)="toggleSimilars(result.self.para_id)" *ngIf="result.similars">
+    <mat-icon>keyboard_arrow_down</mat-icon> ({{ result.similars.length }})
+  </span>
+  <span
+    class="egwk-search-tools-button"
+    (click)="toggleFilter()" *ngIf="result.similars">
+    <mat-icon *ngIf="!settings.showDiff">filter</mat-icon>
+    <mat-icon *ngIf="settings.showDiff">crop_original</mat-icon>
+  </span>
+  <span
+    class="egwk-search-tools-button"
+    (click)="toggleDeletions()" *ngIf="result.similars && settings.showDiff">
+    <mat-icon *ngIf="!settings.showDeletions">photo_library</mat-icon>
+    <mat-icon *ngIf="settings.showDeletions">photo</mat-icon>
+  </span>
+</span>

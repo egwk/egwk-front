@@ -1,7 +1,7 @@
 import {Component, HostListener, OnInit} from '@angular/core';
 import {ActivatedRoute, ParamMap} from "@angular/router";
 import {switchMap} from "rxjs/operators";
-import {EgwkApiService} from "../services/egwk-api.service";
+import {EgwkSynchService} from "../services/egwk-synch.service";
 import {Location} from "@angular/common";
 
 @Component({
@@ -11,14 +11,17 @@ import {Location} from "@angular/common";
 })
 export class SynchComponent implements OnInit {
 
-  // todo: CRITICAL: fix saving
+  // todo: CRITICAL: fix cutting by non-alphanumeric character
+  // todo: CRITICAL: fix merge up by page start / merge down by page start
+  // todo: split into separate classes by functionality: undo/redo, gradient colors,
+  // todo: implement editing, commenting (eg. noting faulty translations, etc.)
   // todo: implement authentication
+  // todo: implement list books and sources
   // todo: implement "add source"
   // todo: add proportion multiplier depending on language
 
   book: any = {};
   pagination: any = {};
-  selection: any;
   active: string;
   indexMap: Map<string, number> = new Map();
   indexMapRev: Map<number, string> = new Map();
@@ -32,13 +35,12 @@ export class SynchComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private apiService: EgwkApiService,
+    private synchService: EgwkSynchService,
     private location: Location,
   ) {
   }
 
   reset() {
-    this.selection = {};
     this.active = '';
     this.indexMap.clear();
     this.indexMapRev.clear();
@@ -68,7 +70,7 @@ export class SynchComponent implements OnInit {
     }
     this.loading = true;
     this.reset();
-    return this.apiService.getBook(code, translationCode, page, limit);
+    return this.synchService.getBook(code, translationCode, page, limit);
   }
 
   setupBook(book) {
@@ -84,7 +86,7 @@ export class SynchComponent implements OnInit {
   }
 
   setupUri(page) {
-    let uri = this.apiService.getUri(this.code, this.translationCode);
+    let uri = this.synchService.getUri(this.code, this.translationCode);
     this.location.replaceState(`${uri}/${page}`);
   }
 
@@ -154,33 +156,34 @@ export class SynchComponent implements OnInit {
     }
   }
 
-  protected _merge(index: number) {
-    this.book.translation[index] = this.book.translation[index] + ' ' + this.book.translation[index + 1];
+  protected _merge(index: number, glue = ' ') {
+    this.book.translation[index] = this.book.translation[index] + glue + this.book.translation[index + 1];
   }
 
-  protected merge(index: number) {
+  protected merge(index: number, glue = ' ') {
     if (this.book.translation[index] !== undefined && this.book.translation[index + 1] !== undefined) {
 
       this.undo.push({
         type: 'merge',
         index: index,
+        glue: glue,
         text: this.book.translation[index],
         text2: this.book.translation[index + 1],
         startOffset: this.book.translation[index].length
       });
       this.redo = [];
 
-      this._merge(index);
+      this._merge(index, glue);
     }
   }
 
-  mergeDown(index: number,) {
-    this.merge(index);
+  mergeDown(index: number, glue = ' ') {
+    this.merge(index, glue);
     this._delete(index + 1);
   }
 
-  mergeUp(index: number) {
-    this.merge(index - 1);
+  mergeUp(index: number, glue = ' ') {
+    this.merge(index - 1, glue);
     this._delete(index);
   }
 
@@ -192,31 +195,18 @@ export class SynchComponent implements OnInit {
   }
 
   cut(index: number) {
-    if (this.selection !== undefined && this.selection.index === index) {
+    let range = window.getSelection().getRangeAt(0);
 
-      let startOffset = this.selection.startOffset;
+    if (0 !== range.startOffset) {
 
       this.undo.push({
         type: 'cut',
         index: index,
-        startOffset: startOffset
+        startOffset: range.startOffset
       });
       this.redo = [];
 
-      this._cut(index, startOffset);
-    }
-  }
-
-  selectCutPosition(index: number, paraId: string) {
-    if (paraId === this.active) {
-      let range = window.getSelection().getRangeAt(0);
-      this.selection = {
-        startOffset: range.startOffset,
-        index: index,
-        paraId: paraId
-      }
-    } else {
-      this.selection = undefined;
+      this._cut(index, range.startOffset);
     }
   }
 
@@ -255,7 +245,7 @@ export class SynchComponent implements OnInit {
   saveBook() {
     let limit = this.pagination.per_page;
     let page = this.pagination.current_page;
-    this.apiService
+    this.synchService
       .saveBook(this.book.translation, this.translationCode, limit, page)
       .subscribe(
         response => {
@@ -322,7 +312,7 @@ export class SynchComponent implements OnInit {
       case 'ArrowDown':
         this.overrideDefault($event);
         if ($event.ctrlKey) {
-          this.mergeDown(index);
+          this.mergeDown(index, $event.shiftKey ? "\n" : ' ');
         } else {
           let nextParaId = this.indexMapRev.get(index + 1);
           this.activate(nextParaId);
@@ -331,7 +321,7 @@ export class SynchComponent implements OnInit {
       case 'ArrowUp':
         this.overrideDefault($event);
         if ($event.ctrlKey) {
-          this.mergeUp(index);
+          this.mergeUp(index, $event.shiftKey ? "\n" : ' ');
         } else {
           let prevParaId = this.indexMapRev.get(index - 1);
           this.activate(prevParaId);

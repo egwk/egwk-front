@@ -1,14 +1,16 @@
 import {Injectable} from '@angular/core';
 import {Observable} from "rxjs/internal/Observable";
-import {HttpClient} from "@angular/common/http";
 import {AppSettings} from "../app.settings";
+import {HttpClient} from "@angular/common/http";
 
 @Injectable({
   providedIn: 'root'
 })
-export class EgwkApiService {
+export class EgwkSynchService {
 
-  constructor(private http: HttpClient) {
+  constructor(
+    protected http: HttpClient,
+  ) {
   }
 
   getParams(page: number, limit: number): string {

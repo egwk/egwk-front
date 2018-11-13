@@ -1,4 +1,5 @@
 import {BrowserModule} from '@angular/platform-browser';
+import {FormsModule} from '@angular/forms';
 import {NgModule} from '@angular/core';
 
 import {AppComponent} from './app.component';
@@ -8,14 +9,24 @@ import {SynchComponent} from './synch/synch.component';
 import {SearchComponent} from './search/search.component';
 import {PageNotFoundComponent} from './page-not-found/page-not-found.component';
 import {HttpClientModule} from '@angular/common/http';
-import {MatIconModule, MatButtonModule} from "@angular/material";
+import {MatIconModule, MatButtonModule, MatSliderModule, MatSlideToggleModule} from "@angular/material";
+import { StripHtmlPipe } from './pipes/strip-html.pipe';
+import { HighlightTextPipe } from './pipes/highlight-text.pipe';
+import { ShowDelPipe } from './pipes/show-del.pipe';
+import { ParagraphComponent } from './search/paragraph/paragraph.component';
+import { ToolsComponent } from './search/tools/tools.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     SynchComponent,
     SearchComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    StripHtmlPipe,
+    HighlightTextPipe,
+    ShowDelPipe,
+    ParagraphComponent,
+    ToolsComponent
   ],
   imports: [
     HttpClientModule,
@@ -24,8 +35,11 @@ import {MatIconModule, MatButtonModule} from "@angular/material";
       //{ enableTracing: true } // <-- debugging purposes only
     ),
     BrowserModule,
+    FormsModule,
     MatIconModule,
     MatButtonModule,
+    MatSliderModule,
+    MatSlideToggleModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

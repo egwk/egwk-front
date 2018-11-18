@@ -1,4 +1,5 @@
 import {BrowserModule} from '@angular/platform-browser';
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {FormsModule} from '@angular/forms';
 import {NgModule} from '@angular/core';
 
@@ -9,12 +10,20 @@ import {SynchComponent} from './synch/synch.component';
 import {SearchComponent} from './search/search.component';
 import {PageNotFoundComponent} from './page-not-found/page-not-found.component';
 import {HttpClientModule} from '@angular/common/http';
-import {MatIconModule, MatButtonModule, MatSliderModule, MatSlideToggleModule} from "@angular/material";
+import {
+  MatIconModule,
+  MatButtonModule,
+  MatSliderModule,
+  MatSlideToggleModule,
+  MatSelectModule
+} from "@angular/material";
 import { StripHtmlPipe } from './pipes/strip-html.pipe';
 import { HighlightTextPipe } from './pipes/highlight-text.pipe';
 import { ShowDelPipe } from './pipes/show-del.pipe';
 import { ParagraphComponent } from './search/paragraph/paragraph.component';
 import { ToolsComponent } from './search/tools/tools.component';
+import { LoadingComponent } from './loading/loading.component';
+import { SynchSelectComponent } from './synch/select/synch-select.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +35,9 @@ import { ToolsComponent } from './search/tools/tools.component';
     HighlightTextPipe,
     ShowDelPipe,
     ParagraphComponent,
-    ToolsComponent
+    ToolsComponent,
+    LoadingComponent,
+    SynchSelectComponent
   ],
   imports: [
     HttpClientModule,
@@ -35,11 +46,13 @@ import { ToolsComponent } from './search/tools/tools.component';
       //{ enableTracing: true } // <-- debugging purposes only
     ),
     BrowserModule,
+    BrowserAnimationsModule,
     FormsModule,
     MatIconModule,
     MatButtonModule,
     MatSliderModule,
     MatSlideToggleModule,
+    MatSelectModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

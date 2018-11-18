@@ -4,6 +4,7 @@ import {Router, ActivatedRoute, RoutesRecognized} from '@angular/router';
 import {filter, map} from "rxjs/operators";
 import {Title} from '@angular/platform-browser';
 import {AppSettings} from "../app.settings";
+import {Observable} from "rxjs/internal/Observable";
 
 @Injectable({
   providedIn: "root",
@@ -16,12 +17,16 @@ export class TitleService {
   ) {
   }
 
-  init() {
-    this.router.events.pipe(
+  getRouteData(): Observable<any> {
+    return this.router.events.pipe(
       filter(event => event instanceof RoutesRecognized),
       map((event: RoutesRecognized) => {
         return event.state.root.firstChild.data;
-      }))
+      }));
+  }
+
+  init() {
+    this.getRouteData()
       .subscribe(data => {
         let title = '';
         if (data.title) {

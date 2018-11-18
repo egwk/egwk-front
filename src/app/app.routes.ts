@@ -3,8 +3,14 @@ import {SynchComponent} from "./synch/synch.component";
 import {SearchComponent} from "./search/search.component";
 import {PageNotFoundComponent} from "./page-not-found/page-not-found.component";
 import {SynchSelectComponent} from "./synch/select/synch-select.component";
+import {HymnalsComponent} from "./hymnal/hymnals/hymnals.component";
+import {HymnalComponent} from "./hymnal/hymnal.component";
+import {HymnComponent} from "./hymnal/hymn/hymn.component";
 
 export const appRoutes: Routes = [
+  //
+  // Synch
+  //
   {
     path: 'synch',
     component: SynchSelectComponent,
@@ -20,6 +26,37 @@ export const appRoutes: Routes = [
     component: SynchComponent,
     data: {title: 'Synch Writings'}
   },
+  //
+  // Hymnals
+  //
+  {
+    path: 'hymnals',
+    component: HymnalsComponent,
+    data: {title: 'Hymnals'}
+  },
+  {
+    path: 'hymnals/:language',
+    component: HymnalsComponent,
+    data: {title: 'Hymnals'}
+  },
+  {
+    path: 'hymnals/languages',
+    component: HymnalsComponent,
+    data: {title: 'Hymnal languages'}
+  },
+  {
+    path: 'hymnal/:hymnal',
+    component: HymnalComponent,
+    data: {title: 'Hymnal'}
+  },
+  {
+    path: 'hymn/:hymnal/:no',
+    component: HymnComponent,
+    data: {title: 'Hymnal'}
+  },
+  //
+  // Search
+  //
   {
     path: 'search',
     component: SearchComponent,
@@ -34,11 +71,6 @@ export const appRoutes: Routes = [
     path: 'bible',
     component: SearchComponent,
     data: {title: 'Bibles are coming'}
-  },
-  {
-    path: 'hymnals',
-    component: SearchComponent,
-    data: {title: 'Hymnals are coming'}
   },
   {
     path: 'ssq',

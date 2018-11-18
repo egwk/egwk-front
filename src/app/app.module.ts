@@ -24,6 +24,9 @@ import { ParagraphComponent } from './search/paragraph/paragraph.component';
 import { ToolsComponent } from './search/tools/tools.component';
 import { LoadingComponent } from './loading/loading.component';
 import { SynchSelectComponent } from './synch/select/synch-select.component';
+import { HymnalComponent } from './hymnal/hymnal.component';
+import { HymnalsComponent } from './hymnal/hymnals/hymnals.component';
+import { HymnComponent } from './hymnal/hymn/hymn.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +40,10 @@ import { SynchSelectComponent } from './synch/select/synch-select.component';
     ParagraphComponent,
     ToolsComponent,
     LoadingComponent,
-    SynchSelectComponent
+    SynchSelectComponent,
+    HymnalComponent,
+    HymnalsComponent,
+    HymnComponent
   ],
   imports: [
     HttpClientModule,

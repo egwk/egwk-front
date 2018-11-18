@@ -1,0 +1,7 @@
+<div class="egwk-hymnal">
+  <div class="egwk-hymn-list-wrapper">
+    <div class="egwk-hymn-item" [routerLink]="getHymnUrl(hymn)" *ngFor="let hymn of hymnal">
+      <span class="egwk-hymn-item-title">{{ hymn.hymn_no }}. {{ hymn.title }}</span>
+    </div>
+  </div>
+</div>

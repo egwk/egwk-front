@@ -1,0 +1,39 @@
+.egwk-hymnals {
+  margin: 0px 40px 30px 40px;
+}
+
+.egwk-hymnal-list-wrapper {
+  display: flex;
+  /*flex-direction: row;*/
+  flex-wrap: wrap;
+  /*justify-content: space-between;*/
+}
+
+.egwk-hymnal-item {
+  width: 8rem;
+  height: 12rem;
+  margin: 25px;
+  padding: 25px;
+  background-color: #531323;
+  color: #edda8b;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  transform: perspective(100px) rotateY(-1deg);
+  box-shadow: 10px 0px 10px #555;
+  border-left: 15px inset #00000066;
+  border-right: 2px solid #dad3a6;
+}
+
+.egwk-hymnal-item-title {
+  font-weight: bold;
+  align-self: flex-start;
+  text-align: center;
+  flex-grow: 2;
+}
+
+.egwk-hymnal-item-publisher-and-year {
+  font-size: 0.65em;
+  align-self: flex-end;
+  flex-grow: 1;
+}

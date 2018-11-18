@@ -1,0 +1,20 @@
+<div class="egwk-hymn">
+  <loading *ngIf="!hymn.hymn_no"></loading>
+  <div class="egwk-hymn-wrapper">
+    <h1>
+      <ng-container *ngIf="hymn.hymn_no">
+      {{ hymn.hymn_no }}. {{ hymn.title }}
+      </ng-container>
+    </h1>
+    <div class="egwk-hymn-verse" *ngFor="let verse of hymnVerses">
+      <span class="egwk-hymn-verse-no">{{ verse.verse_no }}.</span>
+      <span class="egwk-hymn-verse-content">{{ verse.content }}</span>
+    </div>
+    <div class="egwk-hymn-metadata" *ngIf="hymn">
+      <p class="egwk-hymn-" *ngIf="hymn.composer">{{ hymn.composer }}</p>
+      <p class="egwk-hymn-" *ngIf="hymn.poet">{{ hymn.poet }}, {{ hymn.tune_year }}</p>
+      <p class="egwk-hymn-" *ngIf="hymn.arranger">{{ hymn.arranger }}</p>
+      <p class="egwk-hymn-" *ngIf="hymn.tune">{{ hymn.tune }}, {{ hymn.tune_year }}</p>
+    </div>
+  </div>
+</div>

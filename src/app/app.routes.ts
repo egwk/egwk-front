@@ -2,20 +2,21 @@ import {Routes} from "@angular/router";
 import {SynchComponent} from "./synch/synch.component";
 import {SearchComponent} from "./search/search.component";
 import {PageNotFoundComponent} from "./page-not-found/page-not-found.component";
+import {SynchSelectComponent} from "./synch/select/synch-select.component";
 
 export const appRoutes: Routes = [
   {
     path: 'synch',
+    component: SynchSelectComponent,
+    data: {title: 'Synch Writings'}
+  },
+  {
+    path: 'synch/:translation',
     component: SynchComponent,
     data: {title: 'Synch Writings'}
   },
   {
-    path: 'synch/:code/:translation',
-    component: SynchComponent,
-    data: {title: 'Synch Writings'}
-  },
-  {
-    path: 'synch/:code/:translation/:page',
+    path: 'synch/:translation/:page',
     component: SynchComponent,
     data: {title: 'Synch Writings'}
   },

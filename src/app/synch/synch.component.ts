@@ -3,6 +3,7 @@ import {ActivatedRoute, ParamMap} from "@angular/router";
 import {switchMap} from "rxjs/operators";
 import {EgwkSynchService} from "../services/egwk-synch.service";
 import {Location} from "@angular/common";
+import {AppSettings} from "../app.settings";
 
 @Component({
   selector: 'synch',
@@ -13,10 +14,11 @@ export class SynchComponent implements OnInit {
 
   // todo: CRITICAL: fix cutting by non-alphanumeric character
   // todo: CRITICAL: fix merge up by page start / merge down by page start
+  // todo: implement list books and sources
   // todo: split into separate classes by functionality: undo/redo, gradient colors,
   // todo: implement editing, commenting (eg. noting faulty translations, etc.)
   // todo: implement authentication
-  // todo: implement list books and sources
+  // todo: add clickable pagination
   // todo: implement "add source"
   // todo: add proportion multiplier depending on language
 
@@ -51,8 +53,8 @@ export class SynchComponent implements OnInit {
   loadByroute() {
     return this.route.paramMap.pipe(
       switchMap((params: ParamMap) => {
-          this.code = params.get('code');
           this.translationCode = params.get('translation');
+          this.code = this.translationCode.split('.').shift();
           if (params.has('page')) {
             this.page = parseInt(params.get('page'));
           } else {
@@ -86,8 +88,7 @@ export class SynchComponent implements OnInit {
   }
 
   setupUri(page) {
-    let uri = this.synchService.getUri(this.code, this.translationCode);
-    this.location.replaceState(`${uri}/${page}`);
+    this.location.replaceState(AppSettings.SYNCH_API_URI + `${this.translationCode}/${page}`);
   }
 
   ngOnInit() {

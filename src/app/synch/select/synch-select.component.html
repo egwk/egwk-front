@@ -1,0 +1,8 @@
+<div class="egwk-synch">
+  <!--<loading *ngIf="!lists.translations"></loading>-->
+  <div [ngClass]="{'flex-center': true, 'position-ref': true}">
+    <ul>
+      <li *ngFor="let translation of translations" [value]="translation"><a [routerLink]="getUrl(translation)">{{ translation }}</a></li>
+    </ul>
+  </div>
+</div>

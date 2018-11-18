@@ -40,7 +40,7 @@
 
   </div>
 
-  <div class="egwk-search-results flex-center position-ref full-height" *ngIf="result === null">loading...</div>
+  <loading *ngIf="result === null"></loading>
 
   <ol class="egwk-search-results" *ngIf="result">
     <li class="egwk-search-result" *ngFor="let item of result?.data">

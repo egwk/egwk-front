@@ -1,0 +1,64 @@
+.egwk-loading-wrapper{
+  min-height: 300px;
+}
+
+@media (max-width: 767px) {
+  .egwk-loading-wrapper{
+    min-height: 100px;
+  }
+}
+
+img.egwk-loading {
+  width:100px;
+  -webkit-animation: loading 0.7s steps(1, end) infinite;
+  animation: loading 0.7s steps(1, end) infinite;
+}
+
+@keyframes loading {
+  0% {
+    clip-path: polygon(
+        0 0,
+        100% 0,
+        100% 60%,
+        75% 60%,
+        75% 100%,
+        0 100%
+    );
+  }
+  25% {
+    clip-path: polygon(
+        0 0,
+        100% 0,
+        100% 60%,
+        85% 60%,
+        85% 100%,
+        0 100%
+    );
+  }
+  50% {
+    clip-path: polygon(
+        0 0,
+        100% 0,
+        100% 60%,
+        93% 60%,
+        93% 100%,
+        0 100%
+    );
+  }
+  75% {
+    clip-path: polygon(
+        0 0,
+        100% 0,
+        100% 100%,
+        0 100%
+    );
+  }
+  100% {
+    clip-path: polygon(
+        0 0,
+        100% 0,
+        100% 100%,
+        0 100%
+    );
+  }
+}

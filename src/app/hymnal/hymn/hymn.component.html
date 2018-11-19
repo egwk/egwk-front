@@ -16,5 +16,6 @@
       <p class="egwk-hymn-" *ngIf="hymn.arranger">{{ hymn.arranger }}</p>
       <p class="egwk-hymn-" *ngIf="hymn.tune">{{ hymn.tune }}, {{ hymn.tune_year }}</p>
     </div>
+    <img [src]="scoreImage" *ngIf="scoreImage">
   </div>
 </div>

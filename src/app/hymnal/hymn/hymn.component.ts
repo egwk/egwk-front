@@ -21,6 +21,29 @@ export class HymnComponent implements OnInit {
 
   hymnVerses: Array<HymnVerse>;
   hymn: Hymn = new Hymn();
+  scoreImage: any = null;
+  scoreLoading: boolean;
+
+  createImageFromBlob(image: Blob) {
+    let reader = new FileReader();
+    reader.addEventListener("load", () => {
+      this.scoreImage = reader.result;
+    }, false);
+    if (image) {
+      reader.readAsDataURL(image);
+    }
+  }
+
+  getScore(type: string, slug: string, no: string, verse: string = '') {
+    this.scoreLoading = true;
+    this.hymnalService.getScore(type, slug, no, verse).subscribe(data => {
+      this.createImageFromBlob(data);
+      this.scoreLoading = false;
+    }, error => {
+      this.scoreLoading = false;
+      console.log(error);
+    });
+  }
 
   loadByroute() {
     return this.route.paramMap.pipe(
@@ -29,6 +52,7 @@ export class HymnComponent implements OnInit {
           let no = params.get('no');
           this.hymnalService.getHymnal(slug, no).subscribe(hymn => {
             this.hymn = hymn.shift();
+            this.getScore('SATB', slug, no);
           });
           return this.hymnalService.getHymn(slug, no);
         }

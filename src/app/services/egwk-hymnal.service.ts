@@ -40,8 +40,10 @@ export class EgwkHymnalService {
     return this.http.get(AppSettings.HYMN_API_URL + `translate/${language}/${slug}/${no}/${verse}`);
   }
 
-  getScore(type: string, slug: string, no: string, verse: string = ''): Observable<Blob> {
-    return this.http.get(AppSettings.HYMN_API_URL + `score/${type}/${slug}/${no}/${verse}`, {responseType: 'blob'});
+  getScore(type: string, slug: string, no: string, verses: string = '', format = 'png', size = 'normal'): Observable<Blob> {
+    return this.http.get(AppSettings.HYMN_API_URL +
+      `score/${slug}/${no}/${verses}?type=${type}&format=${format}&size=${size}`,
+      {responseType: 'blob'});
   }
 
 }

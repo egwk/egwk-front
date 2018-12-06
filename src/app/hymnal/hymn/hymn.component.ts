@@ -22,6 +22,7 @@ export class HymnComponent implements OnInit {
   hymnVerses: Array<HymnVerse>;
   hymn: Hymn = new Hymn();
   scoreImage: any = null;
+  translations: any = null;
   scoreLoading: boolean;
 
   createImageFromBlob(image: Blob) {
@@ -50,10 +51,13 @@ export class HymnComponent implements OnInit {
       switchMap((params: ParamMap) => {
           let slug = params.get('hymnal');
           let no = params.get('no');
-          this.hymnalService.getHymnal(slug, no).subscribe(hymn => {
-            this.hymn = hymn.shift();
-            this.getScore('SATB', slug, no);
-          });
+          this.hymnalService.getHymnal(slug, no)
+            .subscribe(hymn => {
+              this.hymn = hymn.shift();
+              this.hymnalService.getTranslation('all', slug, no)
+                .subscribe(translations => this.translations = translations);
+              this.getScore('SATB', slug, no, '1,2');
+            });
           return this.hymnalService.getHymn(slug, no);
         }
       )

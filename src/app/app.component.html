@@ -1,20 +1,2 @@
-<div id="watermark"></div>
-
-<nav class="top-right">
-  <ul class="links">
-    <li><a routerLink="home">Home</a></li>
-    <li><a routerLink="books">Books</a></li>
-    <li><a routerLink="bible">Bible</a></li>
-    <li><a routerLink="hymnals">Hymnals</a></li>
-    <li><a routerLink="ssq">SSQ</a></li>
-    <li><a routerLink="synch">Synch</a></li>
-    <li><input type="text" placeholder="Search..." name="search"></li>
-  </ul>
-</nav>
-
-<div id="egwk-body">
-
-  <router-outlet #routerOutlet="outlet"></router-outlet>
-
-</div>
-
+<app-web *ngIf="!desktop"></app-web>
+<app-desktop *ngIf="desktop"></app-desktop>

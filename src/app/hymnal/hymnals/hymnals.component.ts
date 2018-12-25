@@ -6,7 +6,7 @@ import {Hymnal} from "../../models/hymnal.model";
 import {AppSettings} from "../../app.settings";
 
 @Component({
-  selector: 'hymnals',
+  selector: 'app-hymnals',
   templateUrl: './hymnals.component.html',
   styleUrls: ['./hymnals.component.css']
 })
@@ -29,7 +29,7 @@ export class HymnalsComponent implements OnInit {
           return this.hymnalService.getHymnals(this.language);
         }
       )
-    )
+    );
   }
 
   getHymnalUrl(hymnal: Hymnal) {

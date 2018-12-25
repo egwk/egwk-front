@@ -1,0 +1,17 @@
+<mat-card class="example-card">
+  <mat-card-header>
+    <mat-card-title>Login</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <p>
+      <input matInput placeholder="Username" [(ngModel)]="username" name="username" required>
+    </p>
+    <p>
+      <input matInput placeholder="Password" [(ngModel)]="password" type="password" name="password" required>
+    </p>
+    <mat-spinner [style.display]="showSpinner ? 'block' : 'none'"></mat-spinner>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-raised-button (click)="login()">Login</button>
+  </mat-card-actions>
+</mat-card>

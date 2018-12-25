@@ -12,28 +12,29 @@ import {AppSettings} from "../app.settings";
 })
 export class SynchComponent implements OnInit {
 
-  // todo: CRITICAL: fix cutting by non-alphanumeric character
   // todo: CRITICAL: fix merge up by page start / merge down by page start
-  // todo: implement list books and sources
   // todo: split into separate classes by functionality: undo/redo, gradient colors,
-  // todo: implement editing, commenting (eg. noting faulty translations, etc.)
+  // todo: implement commenting (eg. noting faulty translations, etc.)
   // todo: implement authentication
   // todo: add clickable pagination
   // todo: implement "add source"
   // todo: add proportion multiplier depending on language
 
-  book: any = {};
-  pagination: any = {};
-  active: string;
-  indexMap: Map<string, number> = new Map();
-  indexMapRev: Map<number, string> = new Map();
-  undo: Array<any> = [];
-  redo: Array<any> = [];
-  translationCode: string;
-  code: string;
-  limit = 100; // todo: should be configurable later.
-  page = 1;
   loading = true;
+  book: any = {};
+  active: string;
+
+  protected pagination: any = {};
+  protected textBeforeEdit: string;
+  protected indexMap: Map<string, number> = new Map();
+  protected indexMapRev: Map<number, string> = new Map();
+  protected undoBuffer: Array<any> = [];
+  protected redoBuffer: Array<any> = [];
+  protected editing: number;
+  protected translationCode: string;
+  protected code: string;
+  protected limit = 100; // todo: should be configurable later.
+  protected page = 1;
 
   constructor(
     private route: ActivatedRoute,
@@ -46,8 +47,8 @@ export class SynchComponent implements OnInit {
     this.active = '';
     this.indexMap.clear();
     this.indexMapRev.clear();
-    this.undo = [];
-    this.redo = [];
+    this.undoBuffer = [];
+    this.redoBuffer = [];
   }
 
   loadByroute() {
@@ -152,7 +153,6 @@ export class SynchComponent implements OnInit {
     let element = document.getElementById('egwk-synch-row-' + paraId);
     if (element) {
       element.scrollIntoView({behavior: 'smooth', block: 'center'});
-
       this.active = paraId;
     }
   }
@@ -164,7 +164,7 @@ export class SynchComponent implements OnInit {
   protected merge(index: number, glue = ' ') {
     if (this.book.translation[index] !== undefined && this.book.translation[index + 1] !== undefined) {
 
-      this.undo.push({
+      this.undoBuffer.push({
         type: 'merge',
         index: index,
         glue: glue,
@@ -172,7 +172,7 @@ export class SynchComponent implements OnInit {
         text2: this.book.translation[index + 1],
         startOffset: this.book.translation[index].length
       });
-      this.redo = [];
+      this.redoBuffer = [];
 
       this._merge(index, glue);
     }
@@ -200,12 +200,12 @@ export class SynchComponent implements OnInit {
 
     if (0 !== range.startOffset) {
 
-      this.undo.push({
+      this.undoBuffer.push({
         type: 'cut',
         index: index,
         startOffset: range.startOffset
       });
-      this.redo = [];
+      this.redoBuffer = [];
 
       this._cut(index, range.startOffset);
     }
@@ -217,11 +217,11 @@ export class SynchComponent implements OnInit {
 
   insert(index: number) {
 
-    this.undo.push({
+    this.undoBuffer.push({
       type: 'insert',
       index: index
     });
-    this.redo = [];
+    this.redoBuffer = [];
 
     this._insert(index);
   }
@@ -233,14 +233,54 @@ export class SynchComponent implements OnInit {
 
   delete(index: number) {
 
-    this.undo.push({
+    this.undoBuffer.push({
       type: 'delete',
       index: index,
       text: this.book.translation[index]
     });
-    this.redo = [];
+    this.redoBuffer = [];
 
     this._delete(index);
+  }
+
+  focusOnTextarea(index: number) {
+    let id = 'paragraph-edit-' + index;
+    let target = document.getElementById(id);
+    setTimeout(function () {
+      target.focus();
+    }, 0);
+  }
+
+  protected _edit(index: number) {
+    this.focusOnTextarea(index);
+    this.textBeforeEdit = this.book.translation[index];
+    this.editing = index;
+  }
+
+  edit(index: number) {
+    this._edit(index);
+  }
+
+  protected _doneEdit() {
+    this.editing = undefined;
+  }
+
+  doneEdit(index: number) {
+
+    this.undoBuffer.push({
+      type: 'doneEdit',
+      index: index,
+      text1: this.textBeforeEdit,
+      text2: this.book.translation[index]
+    });
+    this.redoBuffer = [];
+
+    this._doneEdit();
+
+  }
+
+  isEditing(i = null) {
+    return null === i ? this.editing !== undefined : this.editing === i;
   }
 
   saveBook() {
@@ -272,6 +312,9 @@ export class SynchComponent implements OnInit {
       case 'delete':
         this.book.translation.splice(last.index, 0, last.text);
         break;
+      case 'doneEdit':
+        this.book.translation[last.index] = last.text1;
+        break;
     }
   }
 
@@ -290,6 +333,25 @@ export class SynchComponent implements OnInit {
       case 'delete':
         this._delete(last.index);
         break;
+      case 'doneEdit':
+        this.book.translation[last.index] = last.text2;
+        break;
+    }
+  }
+
+  protected undo() {
+    let last = this.undoBuffer.pop();
+    if (last) {
+      this.redoBuffer.push(last);
+      this.undoLast(last);
+    }
+  }
+
+  protected redo() {
+    let last = this.redoBuffer.pop();
+    if (last) {
+      this.undoBuffer.push(last);
+      this.redoLast(last);
     }
   }
 
@@ -305,86 +367,95 @@ export class SynchComponent implements OnInit {
     if (this.indexMap.has(this.active)) {
       index = this.indexMap.get(this.active);
     }
-    switch ($event.key) {
-      case 'Escape':
+    if (this.editing !== undefined) {
+      if ($event.key === 'Escape') {
+        this._doneEdit();
+        this.book.translation[index] = this.textBeforeEdit;
+      } else if ($event.ctrlKey && $event.key.toUpperCase() === 'S') {
         this.overrideDefault($event);
-        this.active = '';
-        break;
-      case 'ArrowDown':
-        this.overrideDefault($event);
-        if ($event.ctrlKey) {
-          this.mergeDown(index, $event.shiftKey ? "\n" : ' ');
-        } else {
-          let nextParaId = this.indexMapRev.get(index + 1);
-          this.activate(nextParaId);
-        }
-        break;
-      case 'ArrowUp':
-        this.overrideDefault($event);
-        if ($event.ctrlKey) {
-          this.mergeUp(index, $event.shiftKey ? "\n" : ' ');
-        } else {
-          let prevParaId = this.indexMapRev.get(index - 1);
-          this.activate(prevParaId);
-        }
-        break;
-      case 'Delete':
-        this.overrideDefault($event);
-        this.delete(index);
-        break;
-      case 'Insert':
-        this.overrideDefault($event);
-        this.insert(index);
-        break;
-      case 'x':
-      case 'X':
-        this.overrideDefault($event);
-        if ($event.ctrlKey) {
-          this.cut(index);
-        }
-        break;
-      case 'z':
-      case 'Z':
-      case 'Backspace':
-        this.overrideDefault($event);
-        if ($event.ctrlKey) {
-          let last = this.undo.pop();
-          if (last) {
-            this.redo.push(last);
-            this.undoLast(last);
+        this.doneEdit(index);
+      }
+    } else {
+      switch ($event.key) {
+        case 'Escape':
+          this.overrideDefault($event);
+          this.active = '';
+          break;
+        case 'ArrowDown':
+          this.overrideDefault($event);
+          if ($event.ctrlKey) {
+            this.mergeDown(index, $event.shiftKey ? "\n" : ' ');
+          } else {
+            let nextParaId = this.indexMapRev.get(index + 1);
+            this.activate(nextParaId);
           }
-        }
-        break;
-      case 'y':
-      case 'Y':
-        this.overrideDefault($event);
-        if ($event.ctrlKey) {
-          let last = this.redo.pop();
-          if (last) {
-            this.undo.push(last);
-            this.redoLast(last);
+          break;
+        case 'ArrowUp':
+          this.overrideDefault($event);
+          if ($event.ctrlKey) {
+            this.mergeUp(index, $event.shiftKey ? "\n" : ' ');
+          } else {
+            let prevParaId = this.indexMapRev.get(index - 1);
+            this.activate(prevParaId);
           }
-        }
-        break;
-      case 's':
-      case 'S':
-        this.overrideDefault($event);
-        if ($event.ctrlKey) {
-          this.saveBook();
-        }
-        break;
-      case 'ArrowRight':
-        this.overrideDefault($event);
-        if ($event.ctrlKey) {
-          this.next();
-        }
-        break;
-      case 'ArrowLeft':
-        this.overrideDefault($event);
-        if ($event.ctrlKey) {
-          this.prev();
-        }
-        break;
+          break;
+        case 'Delete':
+          this.overrideDefault($event);
+          this.delete(index);
+          break;
+        case 'Insert':
+          this.overrideDefault($event);
+          this.insert(index);
+          break;
+        case 'x':
+        case 'X':
+          this.overrideDefault($event);
+          if ($event.ctrlKey) {
+            this.cut(index);
+          }
+          break;
+        case 'z':
+        case 'Z':
+        case 'Backspace':
+          this.overrideDefault($event);
+          if ($event.ctrlKey) {
+            this.undo();
+          }
+          break;
+        case 'y':
+        case 'Y':
+          this.overrideDefault($event);
+          if ($event.ctrlKey) {
+            this.redo()
+          }
+          break;
+        case 's':
+        case 'S':
+          this.overrideDefault($event);
+          if ($event.ctrlKey) {
+            this.saveBook();
+          }
+          break;
+        case 'e':
+        case 'E':
+          this.overrideDefault($event);
+          if ($event.ctrlKey) {
+            this.edit(index);
+          }
+          break;
+        case 'ArrowRight':
+          this.overrideDefault($event);
+          if ($event.ctrlKey) {
+            this.next();
+          }
+          break;
+        case 'ArrowLeft':
+          this.overrideDefault($event);
+          if ($event.ctrlKey) {
+            this.prev();
+          }
+          break;
+      }
     }
   }
 }

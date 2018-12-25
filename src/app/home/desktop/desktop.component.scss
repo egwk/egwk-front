@@ -1,0 +1,36 @@
+@import '../../../colors';
+
+.egwk-welcome-container {
+  width: 100%;
+  //border: 1px solid rgba(0, 0, 0, 0.5);
+}
+
+.egwk-welcome-sidenav-content-wrapper {
+  display: flex;
+  height: 100%;
+  //align-items: center;
+  //justify-content: center;
+  .egwk-welcome-sidenav-content {
+    padding: 8px 48px;
+  }
+}
+
+.egwk-welcome-sidenav {
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  button {
+    display: block;
+    margin: 0;
+    width: 100%;
+    padding: 12px 48px;
+  }
+}
+
+.egwk-welcome-drawer-button {
+  position: fixed;
+  top: 12px;
+  left: 8px;
+  color: $egwk-gray-80;
+}
+

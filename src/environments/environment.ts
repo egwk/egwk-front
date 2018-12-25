@@ -4,7 +4,15 @@
 
 export const environment = {
   production: false,
-  baseUrl: 'http://egwk.localhost/'
+  desktop: false,
+  baseUrl: 'http://egwk.localhost/',
+  // baseUrl: 'https://api-dev.white-konyvtar.hu/',
+  as3rdpClientId: 3,
+  as3rdpClientSecret: "as3rdpClientSecret",
+  as3rdpRedirectUri: 'http://localhost:4201/auth/callback',
+  clientId: 2,
+  clientSecret: "clientSecret",
+  redirectUri: 'http://localhost:4201/auth/callback',
 };
 
 /*

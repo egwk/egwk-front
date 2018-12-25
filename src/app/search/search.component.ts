@@ -23,7 +23,7 @@ export class SearchComponent implements OnInit {
   currentQuery: string;
   similars = [];
   settings = new SearchSettings();
-
+  
   constructor(
     private searchService: EgwkSearchService,
   ) {

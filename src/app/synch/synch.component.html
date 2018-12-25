@@ -13,6 +13,12 @@
         <span class="egwk-translation-tools-button upside-down" (click)="mergeDown(i)">
           <mat-icon>merge_type</mat-icon>
         </span>
+        <span class="egwk-translation-tools-button" (click)="edit(i)" *ngIf="!isEditing(i)">
+          <mat-icon>edit</mat-icon>
+        </span>
+        <span class="egwk-translation-tools-button" (click)="doneEdit(i)" *ngIf="isEditing(i)">
+          <mat-icon>save</mat-icon>
+        </span>
         <span class="egwk-translation-tools-button" (click)="insert(i)">
           <mat-icon>add</mat-icon>
         </span>
@@ -30,8 +36,16 @@
       <div class="egwk-synch-prop" [ngStyle]="{'background-color': propColor(paragraph.content, book.translation[i])}">
         {{ prop(paragraph.content, book.translation[i]) }}%
       </div>
-      <div class="egwk-translation egwk-synch-column">
-        <span [class]="paragraph.element_type">{{ book.translation[i] }}</span>
+      <div class="egwk-translation egwk-synch-column" (click)="!book.translation[i] && edit(i);">
+        <textarea
+          id="{{ 'paragraph-edit-' + i }}"
+          [ngClass]="{
+            'egwk-synch-inline-editor': true,
+            'hidden': book.translation[i] && !isEditing(i)
+          }"
+          [(ngModel)]="book.translation[i]"
+        >{{ book.translation[i] ? book.translation[i] : '' }}</textarea>
+        <span [class]="paragraph.element_type" *ngIf="!isEditing(i)">{{ book.translation[i] }}</span>
         <span class="egwk-refcode">{{ paragraph.refcode_short }}</span>
       </div>
     </div>

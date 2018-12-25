@@ -1,0 +1,39 @@
+<div id="headline"></div>
+
+<nav class="top-right">
+  <ul class="links">
+    <li><input type="text" placeholder="Search" name="search"></li>
+  </ul>
+</nav>
+
+<div id="egwk-body">
+
+  <mat-drawer-container class="egwk-welcome-container" autosize>
+    <mat-drawer #drawer class="egwk-welcome-sidenav" mode="side">
+      <button mat-button *ngFor="let item of menu" [routerLink]="item.id">
+        {{item.label}}
+      </button>
+    </mat-drawer>
+
+    <div class="egwk-welcome-sidenav-content-wrapper" [ngStyle]="{'min-height': (menu.length * 60) + 'px'}">
+      <button class="egwk-welcome-drawer-button" type="button" mat-button (click)="drawer.toggle()">
+        <mat-icon>menu</mat-icon>
+      </button>
+      <div class="egwk-welcome-sidenav-content">
+        <router-outlet #routerOutlet="outlet"></router-outlet>
+        <!--div [ngSwitch]="selectedPage">
+          <app-egw-writings *ngSwitchCase="'egw-writings'"></app-egw-writings>
+          <app-bible *ngSwitchCase="'bible'"></app-bible>
+          <app-ssq *ngSwitchCase="'ssq'"></app-ssq>
+          <app-hymnals *ngSwitchCase="'hymnal'"></app-hymnals>
+          <app-projector *ngSwitchCase="'projector'"></app-projector>
+          <app-settings *ngSwitchCase="'settings'"></app-settings>
+          <app-dashboard *ngSwitchDefault></app-dashboard>
+        </div-->
+      </div>
+    </div>
+
+  </mat-drawer-container>
+
+</div>
+

@@ -1,0 +1,43 @@
+@import '../../../colors.scss';
+@import '../../../variables.scss';
+
+.egwk-paragraph {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  padding: 1rem;
+}
+
+.egwk-paragraph-column {
+  width: $almost-half;
+  word-wrap: break-word;
+}
+
+.egwk-paragraph-column-full {
+  width: $almost-full;
+}
+
+.egwk-paragraph-refcode {
+  font-size: 0.8rem;
+  color: $egwk-primary;
+  display: inline-block;
+  margin-left: 8px;
+}
+
+.egwk-paragraph-column-original {
+
+}
+
+.egwk-paragraph-column-hidden {
+  display: none;
+}
+
+.egwk-paragraph-element-type-h4 {
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+.egwk-paragraph-element-type-h5 {
+  font-weight: bold;
+  font-size: 1.1rem;
+}

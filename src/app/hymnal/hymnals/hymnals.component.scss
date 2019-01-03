@@ -1,5 +1,8 @@
+@import '../../../colors.scss';
+@import '../../../variables.scss';
+
 .egwk-hymnals {
-  margin: 0px 40px 30px 40px;
+  margin-top: $topmargin;
 }
 
 .egwk-hymnal-list-wrapper {

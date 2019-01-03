@@ -1,0 +1,31 @@
+@import '../../../colors.scss';
+@import '../../../variables.scss';
+
+.egwk-dashboard-news {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: stretch;
+}
+
+@media (max-width: $with-mobile) {
+  .egwk-dashboard-news-column {
+    margin: 12px 0;
+    width: 100%;
+  }
+}
+
+@media (min-width: $with-mobile) {
+  .egwk-dashboard-news-column {
+    margin: 8px;
+    width: 45%;
+  }
+}
+
+@media (min-width: $with-tablet) {
+  .egwk-dashboard-news-column {
+    margin: 8px;
+    width: 30%;
+  }
+}
+

@@ -8,7 +8,7 @@ import {AppSettings} from "../../app.settings";
 @Component({
   selector: 'app-hymnals',
   templateUrl: './hymnals.component.html',
-  styleUrls: ['./hymnals.component.css']
+  styleUrls: ['./hymnals.component.scss']
 })
 export class HymnalsComponent implements OnInit {
 

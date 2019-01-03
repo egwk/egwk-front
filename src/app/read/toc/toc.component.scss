@@ -1,0 +1,26 @@
+@import '../../../colors.scss';
+@import '../../../variables.scss';
+@import '../read.scss';
+
+.mat-cell {
+  font-size: inherit;
+}
+
+.egwk-toc-title {
+  padding: 1rem;
+}
+
+.egwk-toc-original {
+  font-size: 0.9rem;
+  margin-right: 2rem;
+}
+
+.egwk-read-toc-section {
+  background-color: $egwk-light-gray;
+}
+
+@media (max-width: $with-mobile) {
+  .egwk-toc-original {
+    display: none;
+  }
+}

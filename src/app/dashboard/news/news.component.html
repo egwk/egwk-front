@@ -1,0 +1,32 @@
+<div class="egwk-dashboard-news flex-center" *ngIf="news; else loading">
+  <div class="egwk-dashboard-news-column" id="egwk-dashboard-news-column-pinned">
+    <h1 i18n>Pinned News</h1>
+    <article *ngFor="let pinned of news.pinned">
+      <h2>{{ pinned.title }}</h2>
+      <span class="article-date">{{ pinned.ndate }}</span>
+      <p>{{ pinned.lead }}</p>
+      <a href="" class="article-more" i18n="@@more">More...</a>
+    </article>
+  </div>
+  <div class="egwk-dashboard-news-column" id="egwk-dashboard-news-column-others">
+    <h1 i18n>Further news</h1>
+    <article *ngFor="let others of news.others">
+      <h2>{{ others.title }}</h2>
+      <span class="article-date">{{ others.ndate }}</span>
+      <p>{{ others.lead }}</p>
+      <a href="" class="article-more" i18n="@@more">More...</a>
+    </article>
+  </div>
+  <div class="egwk-dashboard-news-column" id="egwk-dashboard-news-column-new">
+    <h1 i18n>Latest Editions</h1>
+    <article *ngFor="let books of news.books">
+      <h2>{{ books.tr_title }}</h2>
+      <span class="article-date">{{ books.added }}</span>
+      <p>{{ books.summary }}</p>
+      <a href="" class="article-more" i18n="@@more">More...</a>
+    </article>
+  </div>
+</div>
+<ng-template #loading>
+  <loading></loading>
+</ng-template>

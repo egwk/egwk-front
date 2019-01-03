@@ -1,16 +1,15 @@
-<div id="headline">
-  <div id="watermark"></div>
-</div>
+<nav class="top-nav">
 
-<nav class="top-right">
+  <div class="egwk-logo button" routerLink="/"></div>
+
   <ul class="links">
-    <li><a routerLink="home">Home</a></li>
-    <li><a routerLink="books">Books</a></li>
-    <li><a routerLink="bible">Bible</a></li>
-    <li><a routerLink="hymnals">Hymnals</a></li>
-    <li><a routerLink="ssq">SSQ</a></li>
-    <li><a routerLink="synch">Synch</a></li>
-    <li><input type="text" placeholder="Search" name="search"></li>
+    <li><a routerLink="books" i18n="@@top-nav-books">Books</a></li>
+    <li><a routerLink="bible" i18n="@@top-nav-bible">Bible</a></li>
+    <li><a routerLink="hymnals" i18n="@@top-nav-hymnals">Hymnals</a></li>
+    <li><a routerLink="ssq" i18n="@@top-nav-ssq">SSQ</a></li>
+    <li><a routerLink="synch" i18n="@@top-nav-synch">Synch</a></li>
+    <li><input type="text" placeholder="Search" i18n-placeholder="@@top-nav-search" name="search"></li>
+    <li><a routerLink="/auth/login" i18n="@@top-nav-synch">Login</a></li>
   </ul>
 </nav>
 

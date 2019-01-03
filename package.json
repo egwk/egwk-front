@@ -4,6 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve --open --port 4201 --source-map false",
+    "start:hu": "ng serve --open --port 4201 --source-map false --configuration=hu",
     "build": "ng build",
     "prod": "ng build --prod",
     "test": "ng test",

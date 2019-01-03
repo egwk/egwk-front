@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Raleway:300,400,600');
 @import "../node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css";
 @import 'colors.scss';
+@import 'variables.scss';
 
 /* Fonts */
 @font-face {
@@ -60,6 +61,8 @@ html, body, textarea {
 
 a {
   color: $egwk-primary;
+  text-decoration: none;
+
   &:hover {
     color: $egwk-primary-lighter;
     cursor: pointer;
@@ -67,7 +70,7 @@ a {
 }
 
 .full-height {
-  height: 100vh;
+  height: calc(100vh - 2 * #{$topmargin});
 }
 
 .half-height {
@@ -80,15 +83,30 @@ a {
   justify-content: center;
 }
 
-.position-ref {
-  // position: relative;
+nav.top-nav {
+  z-index: 999;
+  width: 100%;
+  top: 0;
+  left: 0;
+  position: fixed;
+  margin: 0;
+  padding: 8px 0;
+  background-color: $egwk-white;
+  display: flex;
+  justify-content: space-between;
 }
 
-nav.top-right {
-  position: absolute;
-  right: 0px;
-  top: 18px;
-  margin-left: 48px;
+
+.egwk-logo {
+  background: url('./assets/images/egw_signo-ocean-side.svg') no-repeat;
+  background-size: 60px;
+  background-position-y: center;
+  background-position-x: 8px;
+  width: 100px;
+}
+
+#egwk-body {
+  padding: 0;
 }
 
 .links {
@@ -98,8 +116,10 @@ nav.top-right {
   display: flex;
   justify-content: flex-end;
   flex-flow: row wrap;
+
   li {
     padding: 0 8px;
+
     a {
       font-size: 12px;
       font-weight: 600;
@@ -107,6 +127,7 @@ nav.top-right {
       text-decoration: none;
       text-transform: uppercase;
     }
+
     input[type='text'] {
       border-radius: 16px;
       border: 1px solid $egwk-gray-80;
@@ -115,28 +136,21 @@ nav.top-right {
       width: 32px;
       margin-right: 12px;
       transition: width 0.125s ease-in-out;
+
       &:focus {
         width: 160px;
+
         &::placeholder {
           font-size: 1em;
         }
       }
+
       &::placeholder {
-        line-height: 1.5em;
-        font-size: 0.7em;
+        line-height: 1em;
+        font-size: 0.75em;
       }
     }
   }
-}
-
-#watermark {
-  background: url('./assets/images/egw_signo-ocean-side.svg') no-repeat;
-  background-size: 60px;
-  background-repeat: no-repeat;
-  background-position-y: center;
-  background-position-x: 8px;
-  width: 100px;
-  height: 70px;
 }
 
 #headline {
@@ -175,6 +189,73 @@ ins {
   display: inline-block;
 }
 
-.hidden{
+.hidden {
   display: none;
+}
+
+.button, .router-link {
+  cursor: pointer;
+}
+
+.top-padding {
+  padding-top: $topmargin;
+}
+
+@media (max-width: $with-mobile) {
+  .top-padding {
+    padding-top: calc(2 * #{$topmargin});
+  }
+}
+
+section {
+  width: 100%;
+  padding-top: 16px;
+  padding-bottom: 16px;
+}
+
+section > * {
+  width: 100%;
+  padding-top: 24px;
+  padding-bottom: 24px;
+}
+
+.flex-wrap {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: $egwk-primary;
+}
+
+p, article {
+  margin: 1rem auto;
+}
+
+h1 {
+  font-size: 1.5rem;
+}
+
+h2 {
+  font-size: 1.33rem;
+}
+
+h3 {
+  font-size: 1.25rem;
+}
+
+h4 {
+  font-size: 1.125rem;
+}
+
+h5 {
+  font-size: 1rem;
+}
+
+h6 {
+  font-size: 0.9rem;
+}
+
+.sda-symbol{
+
 }

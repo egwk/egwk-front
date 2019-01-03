@@ -1,3 +1,59 @@
-<p *ngFor="let book of books">
-  {{ book.tr_title }} - {{ book.title }}
-</p>
+<div class="flex-wrap flex-center egwk-read" *ngIf="booksQuery; else loading">
+  <breadcrumbs [items]="[
+      {title: 'Home', uri: '/', icon: 'home'}
+    ]"></breadcrumbs>
+  <div class="egwk-read-collection" *ngFor="let collection of booksQuery">
+    <a [id]="collection.collectionId"></a>
+    <h1>{{collection.collection}}</h1>
+    <mat-table [dataSource]="collection.books">
+
+      <ng-container cdkColumnDef="tr_code">
+        <mat-header-cell *matHeaderCellDef></mat-header-cell>
+        <mat-cell *matCellDef="let row">{{row.tr_code}}</mat-cell>
+      </ng-container>
+
+      <ng-container cdkColumnDef="tr_title">
+        <mat-header-cell *matHeaderCellDef>Translated title</mat-header-cell>
+        <mat-cell *matCellDef="let row">{{row.tr_title}}</mat-cell>
+      </ng-container>
+
+      <ng-container cdkColumnDef="translator">
+        <mat-header-cell *matHeaderCellDef>Translator</mat-header-cell>
+        <mat-cell *matCellDef="let row">{{row.translator}}</mat-cell>
+      </ng-container>
+
+      <ng-container cdkColumnDef="title">
+        <mat-header-cell *matHeaderCellDef>Original code / title</mat-header-cell>
+        <mat-cell *matCellDef="let row" [innerHTML]="row.book_code + ' / ' + row.title"></mat-cell>
+      </ng-container>
+
+      <ng-container cdkColumnDef="publisher">
+        <mat-header-cell *matHeaderCellDef>Publisher</mat-header-cell>
+        <mat-cell *matCellDef="let row">
+          <egwk-icon type="publisher">{{ row.publisher }}</egwk-icon>
+        </mat-cell>
+      </ng-container>
+
+      <ng-container cdkColumnDef="year">
+        <mat-header-cell *matHeaderCellDef>Year</mat-header-cell>
+        <mat-cell *matCellDef="let row">{{row.year}}</mat-cell>
+      </ng-container>
+
+      <ng-container cdkColumnDef="church_approved">
+        <mat-header-cell *matHeaderCellDef></mat-header-cell>
+        <mat-cell *matCellDef="let row">
+          <egwk-icon-sda *ngIf="row.church_approved"></egwk-icon-sda>
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="columns"></mat-header-row>
+
+      <mat-row *matRowDef="let row; columns: columns" [routerLink]="row.toc_uri" class="router-link"></mat-row>
+
+    </mat-table>
+  </div>
+</div>
+
+<ng-template #loading>
+  <loading></loading>
+</ng-template>

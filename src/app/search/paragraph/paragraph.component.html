@@ -1,31 +1,33 @@
+<ng-container *ngIf="paragraph">
 <span
   class="egwk-search-result-book-year"
   *ngIf="paragraph.year"
 >({{paragraph.year}}) </span>
-<span class="egwk-search-result-book-title"
-      [innerHTML]="paragraph.book_title | striphtml"></span>
-<ng-container *ngIf="paragraph.chapter_title">,
-  <span class="egwk-search-result-chapter-title"
-        [innerHTML]="paragraph.chapter_title | striphtml"></span>
-</ng-container>
-<span
-  class="egwk-search-tools-button"
-  (click)="emitUseAsReference(paragraph.para_id)">
+  <span class="egwk-search-result-book-title"
+        [innerHTML]="paragraph.book_title | striphtml"></span>
+  <ng-container *ngIf="paragraph.chapter_title">,
+    <span class="egwk-search-result-chapter-title"
+          [innerHTML]="paragraph.chapter_title | striphtml"></span>
+  </ng-container>
+  <span
+    class="egwk-search-tools-button"
+    (click)="emitUseAsReference(paragraph.para_id)">
     <mat-icon>chevron_right</mat-icon>
 </span>
-<div *ngIf="parent !== null && settings.showDiff">
+  <div *ngIf="parent !== null && settings.showDiff">
   <span
     class="egwk-search-result-coverage"
     *ngIf="similarity.covers"
   >[it covers reference: {{ similarity.covers }}% &middot; it's covered by reference: {{ similarity.covered }}%]</span>
-</div>
+  </div>
 
-<p>
+  <p>
   <span *ngIf="parent === null || !settings.showDiff"
         class="egwk-search-result-content"
         [innerHTML]="paragraph.content | striphtml | highlightText:currentQuery"></span>
-  <span *ngIf="parent !== null && settings.showDiff"
-        class="egwk-search-result-content"
-        [innerHTML]="diffHtml(parent.content | striphtml, paragraph.content | striphtml) | showDel:settings.showDeletions | highlightText:currentQuery"></span>
-  <span class="egwk-refcode">{{ ' [' + paragraph.para_id + ']' }} {{ ' {' + paragraph.refcode_short + '}' }}</span>
-</p>
+    <span *ngIf="parent !== null && settings.showDiff"
+          class="egwk-search-result-content"
+          [innerHTML]="diffHtml(parent.content | striphtml, paragraph.content | striphtml) | showDel:settings.showDeletions | highlightText:currentQuery"></span>
+    <span class="egwk-refcode">{{ ' [' + paragraph.para_id + ']' }} {{ ' {' + paragraph.refcode_short + '}' }}</span>
+  </p>
+</ng-container>

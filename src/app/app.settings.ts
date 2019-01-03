@@ -1,8 +1,12 @@
 import { environment } from '../environments/environment';
 
 export class AppSettings {
+  public static APP_ID = 'egwk';
   public static APP_TITLE = 'EGWK';
   public static APP_TITLE_SEPARATOR = ' | ';
+  public static APP_DATA_EXPIRES = 86400000; // 24 * 60 * 60 * 1000 ms;
+
+  public static DEFAULT_SHOW_ORIGINAL = true;
 
   public static API_URL = environment.baseUrl;
 
@@ -35,5 +39,8 @@ export class AppSettings {
 
   public static READER_API_URI = 'reader/';
   public static READER_API_URL = AppSettings.API_URL + AppSettings.READER_API_URI;
+
+  public static NEWS_API_URI = 'news/';
+  public static NEWS_API_URL = AppSettings.API_URL + AppSettings.NEWS_API_URI;
 
 }

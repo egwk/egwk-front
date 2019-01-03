@@ -1,5 +1,6 @@
-<div class="egwk-hymnals">
-  <div class="egwk-hymnal-list-wrapper" *ngIf="hymnals; else loading">
+<div class="full-height flex-wrap egwk-hymnals" *ngIf="hymnals; else loading">
+
+  <div class="egwk-hymnal-list-wrapper">
     <div class="egwk-hymnal-item" [routerLink]="getHymnalUrl(hymnal)" *ngFor="let hymnal of hymnals">
       <p class="egwk-hymnal-item-title">{{ hymnal.title }}</p>
       <p class="egwk-hymnal-item-publisher-and-year" *ngIf="hymnal.publisher && hymnal.year">{{ hymnal.publisher }},
@@ -8,7 +9,11 @@
       <!--<p class="egwk-hymnal-item-description">{{ hymnal.description }}</p>-->
     </div>
   </div>
-  <ng-template #loading>
-    <loading></loading>
-  </ng-template>
+
 </div>
+
+<ng-template #loading>
+  <loading></loading>
+</ng-template>
+
+

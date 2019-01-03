@@ -1,0 +1,18 @@
+<div class="egwk-paragraph">
+  <div [ngClass]="
+    {'egwk-paragraph-column': showOriginal,
+     'egwk-paragraph-column-hidden': !showOriginal,
+     'egwk-paragraph-column-original': true
+     }">
+    <span [innerHTML]="paragraph.content" [class]="'egwk-paragraph-element-type-' + paragraph.element_type"></span>
+    <span *ngIf="paragraph.refcode_short" class="egwk-paragraph-refcode">{{ '{' + paragraph.refcode_short + '}' }}</span>
+  </div>
+  <div [ngClass]="
+    {'egwk-paragraph-column': showOriginal,
+     'egwk-paragraph-column-full': !showOriginal,
+     'egwk-paragraph-column-translation': true
+     }">
+    <span [innerHTML]="paragraph.tr_content" [class]="'egwk-paragraph-element-type-' + paragraph.element_type"></span>
+    <span *ngIf="paragraph.refcode_short" class="egwk-paragraph-refcode">{{ '{' + paragraph.refcode_short + '}' }}</span>
+  </div>
+</div>

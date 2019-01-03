@@ -1,0 +1,20 @@
+@import '../../colors.scss';
+@import '../../variables.scss';
+
+.circular-menu{
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  width: 56px;
+  height: 56px;
+  border-radius: 28px;
+  background-color: $egwk-primary;
+  color: rgba($egwk-white, 0.8);
+  box-shadow: 3px 3px 10px rgba($egwk-black, 0.5);
+  cursor: pointer;
+}
+
+.circular-menu .mat-icon {
+  margin: 10px 0 0 10px;
+  font-size: 2rem;
+}

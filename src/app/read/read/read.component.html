@@ -1,0 +1,57 @@
+<div
+  class="flex-wrap flex-center top-padding"
+  *ngIf="chapter && metadata; else loading"
+  data-mc-options='{"touchAction": "pan-y"}'
+>
+<!--
+todo:
+  (swipeleft)="nextChapter($event)"
+  (swiperight)="prevChapter($event)"
+-->
+  <div>
+    <breadcrumbs [items]="[
+      {title: 'Home', uri: '/', icon: 'home'},
+      {title: 'Books', uri: '/books'},
+      {title: getCollectionName(metadata.book[0].primary_collection_text_id), uri: '/books', 'fragment': metadata.book[0].primary_collection_text_id},
+      {
+        title: metadata.book[0].tr_title,
+        alt: metadata.book[0].tr_title + ' (' + metadata.book[0].translator + '; ' + metadata.book[0].publisher_name + ', ' + metadata.book[0].year + ')',
+        uri: metadata.book[0].toc_uri
+      },
+      {title: metadata.chapter[0].tr_content}
+    ]"></breadcrumbs>
+    <h2 class="egwk-read-chapter-title">
+      <span [innerHTML]="metadata.chapter[0].tr_content"></span>
+      <ng-container *ngIf="showOriginal">
+        &mdash; <span [innerHTML]="metadata.chapter[0].content"></span>
+      </ng-container>
+    </h2>
+
+    <div class="egwk-read-tools">
+      <button mat-button (click)="toggleShowOriginal()">
+        <mat-icon *ngIf="showOriginal">books</mat-icon>
+        <mat-icon *ngIf="!showOriginal">collections_bookmark</mat-icon>
+      </button>
+    </div>
+
+
+    <chapter-step [nav]="metadata.nav"></chapter-step>
+
+    <paragraph
+      *ngFor="let paragraph of chapter.data"
+      [paragraph]="paragraph"
+      (click)="openParagraphPropertiesWithDblClickHack($event, paragraph, metadata.book[0])"
+      [showOriginal]="showOriginal"
+    ></paragraph>
+
+    <chapter-step [nav]="metadata.nav"></chapter-step>
+
+    <!--circular-menu></circular-menu-->
+
+  </div>
+</div>
+
+
+<ng-template #loading>
+  <loading></loading>
+</ng-template>

@@ -1,0 +1,27 @@
+@import '../../../colors.scss';
+@import '../../../variables.scss';
+
+:host {
+  width: 100%;
+}
+
+.egwk-chapter-step {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin: 32px 0;
+  padding: 1rem;
+  font-size: 0.75rem;
+}
+
+.egwk-chapter-step button {
+  display: block;
+  word-wrap: break-word;
+}
+
+@media (min-width: $with-mobile) {
+  .egwk-chapter-step button {
+    width: $almost-half;
+  }
+}
+

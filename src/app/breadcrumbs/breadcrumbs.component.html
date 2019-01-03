@@ -1,0 +1,16 @@
+<div class="breadcrumbs">
+  <span
+    *ngFor="let item of items"
+    [routerLink]="item.uri"
+    [fragment]="item.fragment"
+    [ngClass]="{
+      'breadcrumb-item': true,
+      'router-link': item.uri,
+      'breadcrumb-link': item.uri
+    }"
+    [matTooltip]="item.alt ? item.alt : item.title"
+  >
+    <mat-icon *ngIf="item.icon">{{item.icon}}</mat-icon>
+    <span *ngIf="!item.icon" [innerHTML]="item.title"></span>
+  </span>
+</div>

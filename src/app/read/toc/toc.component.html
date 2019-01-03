@@ -1,0 +1,49 @@
+<div class="flex-wrap flex-center top-padding" *ngIf="toc; else loading">
+  <div>
+    <breadcrumbs [items]="[
+      {title: 'Home', uri: '/', icon: 'home'},
+      {title: 'Books', uri: '/books'},
+      {title: getCollectionName(metadata.primary_collection_text_id), uri: '/books', 'fragment': metadata.primary_collection_text_id}
+    ]"></breadcrumbs>
+    <h1 class="egwk-toc-title">
+      <span>{{metadata.tr_title}} &mdash; {{metadata.title}}</span>
+      &nbsp;
+      <small>
+        ({{metadata.tr_code}}<ng-container *ngIf="metadata.book_code !== metadata.tr_code"> &mdash; {{metadata.book_code}}</ng-container>)
+      </small>
+    </h1>
+    <p class="egwk-toc-title">
+      {{metadata.translator}}<br/>
+      {{metadata.publisher_name}}, {{metadata.year}}.
+    </p>
+    <mat-table [dataSource]="toc.data">
+
+      <ng-container cdkColumnDef="tr_content">
+        <mat-header-cell *matHeaderCellDef></mat-header-cell>
+        <mat-cell *matCellDef="let row" [innerHTML]="row.tr_content"></mat-cell>
+      </ng-container>
+
+      <ng-container cdkColumnDef="content">
+        <mat-header-cell *matHeaderCellDef></mat-header-cell>
+        <mat-cell *matCellDef="let row" [innerHTML]="row.content" class="egwk-toc-original"></mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="['content','tr_content']"></mat-header-row>
+
+      <mat-row
+        *matRowDef="let row; columns: ['content','tr_content']"
+        [ngClass]="{
+          'egwk-read-toc-section': row.element_type === 'h2',
+          'router-link': row.element_type !== 'h2'
+        }"
+          [routerLink]="row.element_type !== 'h2' ? row.chapter_uri : null"
+      ></mat-row>
+
+    </mat-table>
+  </div>
+</div>
+
+
+<ng-template #loading>
+  <loading></loading>
+</ng-template>

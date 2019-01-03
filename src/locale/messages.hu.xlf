@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+  <file source-language="en" datatype="plaintext" original="ng2.template">
+    <body>
+      <trans-unit id="top-nav-home" datatype="html">
+        <source>Home</source>
+        <target>Főoldal</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/home/web/web.component.html</context>
+          <context context-type="linenumber">3</context>
+        </context-group>
+        <note priority="1" from="meaning">Home</note>
+      </trans-unit>
+      <trans-unit id="top-nav-books" datatype="html">
+        <source>Books</source>
+        <target>Könyvek</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/home/web/web.component.html</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+        <note priority="1" from="meaning">Books</note>
+      </trans-unit>
+      <trans-unit id="top-nav-bible" datatype="html">
+        <source>Bible</source>
+        <target>Biblia</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/home/web/web.component.html</context>
+          <context context-type="linenumber">5</context>
+        </context-group>
+        <note priority="1" from="meaning">Bible</note>
+      </trans-unit>
+      <trans-unit id="top-nav-hymnals" datatype="html">
+        <source>Hymnals</source>
+        <target>Énekes könyvek</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/home/web/web.component.html</context>
+          <context context-type="linenumber">6</context>
+        </context-group>
+        <note priority="1" from="meaning">Hymnals</note>
+      </trans-unit>
+      <trans-unit id="top-nav-ssq" datatype="html">
+        <source>SSQ</source>
+        <target>Bibliatanulmány</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/home/web/web.component.html</context>
+          <context context-type="linenumber">7</context>
+        </context-group>
+        <note priority="1" from="meaning">SSQ</note>
+      </trans-unit>
+      <trans-unit id="top-nav-synch" datatype="html">
+        <source>Synch</source>
+        <target>Szinkronizáció</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/home/web/web.component.html</context>
+          <context context-type="linenumber">8</context>
+        </context-group>
+        <note priority="1" from="meaning">Synch</note>
+      </trans-unit>
+      <trans-unit id="top-nav-search" datatype="html">
+        <source>Search</source>
+        <target>Keresés</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/home/web/web.component.html</context>
+          <context context-type="linenumber">9</context>
+        </context-group>
+        <note priority="1" from="meaning">Search</note>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

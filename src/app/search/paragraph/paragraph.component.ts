@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Paragraph, Similarity} from "../../models/search-result.model";
+import {SimilarParagraph, Similarity} from "../../models/search-result.model";
 import {SearchSettings} from "../search.component";
 import * as Diff from "text-diff";
 
@@ -10,11 +10,11 @@ import * as Diff from "text-diff";
 })
 export class ParagraphComponent implements OnInit {
 
-  @Input() paragraph: Paragraph;
+  @Input() paragraph: SimilarParagraph;
   @Input() similarity: Similarity;
   @Input() currentQuery: string;
-  @Input() parent: Paragraph = null;
-  @Input('settings') settings: SearchSettings = new SearchSettings();
+  @Input() parent: SimilarParagraph = null;
+  @Input() settings: SearchSettings = new SearchSettings();
   @Output() useAsReference = new EventEmitter();
 
   diff = new Diff();

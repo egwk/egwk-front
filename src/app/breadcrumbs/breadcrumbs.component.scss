@@ -1,0 +1,26 @@
+@import '../../colors.scss';
+@import '../../variables.scss';
+
+:host {
+  width: 100%;
+}
+
+.breadcrumbs {
+  margin: 32px 0;
+  font-size: 0.75rem;
+  background-color: $egwk-light-gray;
+  padding: 1rem;
+}
+
+
+.breadcrumb-item + .breadcrumb-item:before {
+  content: " · ";
+  font-weight: bold;
+}
+
+.material-icons {
+  font-size: 0.85rem;
+  vertical-align: text-top;
+  height: 14px;
+  width: 16px;
+}

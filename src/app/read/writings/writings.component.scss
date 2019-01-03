@@ -1,0 +1,68 @@
+@import '../../../colors.scss';
+@import '../../../variables.scss';
+@import '../read.scss';
+
+.mat-column-tr_code {
+  flex-grow: 1;
+}
+
+.mat-column-tr_title {
+  flex-grow: 5;
+}
+
+.mat-column-translator {
+  flex-grow: 3;
+}
+
+.mat-column-title {
+  flex-grow: 0;
+}
+
+.mat-column-publisher {
+  flex-grow: 0;
+}
+
+.mat-column-year {
+  flex-grow: 1;
+}
+
+.mat-column-church_approved {
+  flex-grow: 0;
+  display: none;
+}
+
+.egwk-read-collection {
+  width: 100%;
+  padding-top: $topmargin;
+}
+
+@media (max-width: $with-mobile) {
+  .egwk-read {
+    margin: $topmargin 0 0 0;
+  }
+}
+
+@media (min-width: $with-mobile) {
+  .mat-column-church_approved {
+    flex-grow: 1;
+    display: flex;
+  }
+  .egwk-read {
+    margin: $topmargin 1rem 0 1rem;
+  }
+}
+
+@media (min-width: $with-tablet) {
+  .mat-column-title {
+    flex-grow: 5;
+  }
+
+  .mat-column-publisher {
+    flex-grow: 2;
+  }
+
+  .egwk-read {
+    margin: $topmargin 3rem 0 3rem;
+  }
+
+}

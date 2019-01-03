@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+  <file source-language="en" datatype="plaintext" original="ng2.template">
+    <body>
+      <trans-unit id="top-nav-home" datatype="html">
+        <source>Home</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/home/web/web.component.html</context>
+          <context context-type="linenumber">6</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="top-nav-books" datatype="html">
+        <source>Books</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/home/web/web.component.html</context>
+          <context context-type="linenumber">7</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="top-nav-bible" datatype="html">
+        <source>Bible</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/home/web/web.component.html</context>
+          <context context-type="linenumber">8</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="top-nav-hymnals" datatype="html">
+        <source>Hymnals</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/home/web/web.component.html</context>
+          <context context-type="linenumber">9</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="top-nav-ssq" datatype="html">
+        <source>SSQ</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/home/web/web.component.html</context>
+          <context context-type="linenumber">10</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="top-nav-synch" datatype="html">
+        <source>Synch</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/home/web/web.component.html</context>
+          <context context-type="linenumber">11</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="top-nav-search" datatype="html">
+        <source>Search</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/home/web/web.component.html</context>
+          <context context-type="linenumber">12</context>
+        </context-group>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

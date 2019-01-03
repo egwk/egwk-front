@@ -1,0 +1,69 @@
+<!--todo-->
+
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>{{data.paragraph.refcode_short}}</mat-card-title>
+    <mat-card-subtitle>{{data.book.publisher_name}}, {{data.paragraph.year}}.</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <mat-icon>bookmark</mat-icon>
+  </mat-card-content>
+</mat-card>
+
+<mat-accordion>
+
+
+  <mat-expansion-panel #panelNotes>
+
+    <mat-expansion-panel-header>
+      <mat-panel-title i18n>My Notes</mat-panel-title>
+      <mat-panel-description></mat-panel-description>
+    </mat-expansion-panel-header>
+
+    <comments [for]="data.paragraph.para_id" [type]="'notes'"></comments>
+
+  </mat-expansion-panel>
+
+
+  <mat-expansion-panel #panelTranslationComment>
+
+    <mat-expansion-panel-header>
+      <mat-panel-title i18n>Comments</mat-panel-title>
+      <mat-panel-description i18n>Translation Comments</mat-panel-description>
+    </mat-expansion-panel-header>
+
+    <comments [for]="data.paragraph.para_id" [type]="'translation'"></comments>
+
+  </mat-expansion-panel>
+
+
+  <mat-expansion-panel #panelScripture>
+
+    <mat-expansion-panel-header>
+      <mat-panel-title i18n>Scripture</mat-panel-title>
+      <mat-panel-description i18n>Scripture References in the Paragraph</mat-panel-description>
+    </mat-expansion-panel-header>
+
+  </mat-expansion-panel>
+
+
+  <mat-expansion-panel #panelTranslations>
+
+    <mat-expansion-panel-header>
+      <mat-panel-title i18n>Translations</mat-panel-title>
+      <mat-panel-description i18n>Alternative and Similar Translations</mat-panel-description>
+    </mat-expansion-panel-header>
+
+  </mat-expansion-panel>
+
+
+  <mat-expansion-panel #panelSimilarity>
+
+    <mat-expansion-panel-header>
+      <mat-panel-title i18n>Similarity</mat-panel-title>
+      <mat-panel-description i18n>Similar Paragraphs and Traceback</mat-panel-description>
+    </mat-expansion-panel-header>
+
+  </mat-expansion-panel>
+
+</mat-accordion>

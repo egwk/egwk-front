@@ -1,0 +1,13 @@
+<div class="egwk-chapter-step">
+  <button mat-button *ngIf="nav.prev[0]; else empty" [routerLink]="nav.prev[0].chapter_uri">
+    <mat-icon>chevron_left</mat-icon>
+    {{nav.prev[0].tr_content}}
+  </button>
+  <button mat-button *ngIf="nav.next[0]; else empty" [routerLink]="nav.next[0].chapter_uri">
+    {{nav.next[0].tr_content}}
+    <mat-icon>chevron_right</mat-icon>
+  </button>
+</div>
+<ng-template #empty>
+  <div></div>
+</ng-template>

@@ -9,7 +9,8 @@ import {HymnComponent} from "./hymnal/hymn/hymn.component";
 import {DashboardComponent} from './dashboard/dashboard.component';
 import {WritingsComponent} from "./read/writings/writings.component";
 import {AuthComponent} from "./auth/auth.component";
-import {LoginComponent} from "./auth/login/login.component";
+import {TocComponent} from "./read/toc/toc.component";
+import {ReadComponent} from "./read/read/read.component";
 
 export const appRoutes: Routes = [
   //
@@ -17,18 +18,14 @@ export const appRoutes: Routes = [
   //
   {
     path: 'login',
-    component: LoginComponent
+    component: AuthComponent
   },
   {
     path: 'auth',
     children: [
-      // {
-      //   path: '',
-      //   component: DashboardsComponent
-      // },
       {
         path: 'login',
-        component: LoginComponent
+        component: AuthComponent
       },
       {
         path: 'callback',
@@ -90,21 +87,52 @@ export const appRoutes: Routes = [
     component: SearchComponent,
     data: {title: 'Search in the Writings'}
   },
+  //
+  // Read testimonies
+  //
   {
     path: 'books',
-    component: WritingsComponent,
-    data: {title: 'Books are coming'}
+    component: WritingsComponent
   },
+  {
+    path: 'toc',
+    children: [
+      {path: ':bookCode', component: TocComponent},
+      {path: ':bookCode/:lang', component: TocComponent},
+      {path: ':bookCode/:lang/:publisher', component: TocComponent},
+      {path: ':bookCode/:lang/:publisher/:year', component: TocComponent},
+      {path: ':bookCode/:lang/:publisher/:year/:no', component: TocComponent},
+    ]
+  },
+  {
+    path: 'chapter',
+    children: [
+      {path: ':paraId', component: ReadComponent},
+      {path: ':paraId/:lang', component: ReadComponent},
+      {path: ':paraId/:lang/:publisher', component: ReadComponent},
+      {path: ':paraId/:lang/:publisher/:year', component: ReadComponent},
+      {path: ':paraId/:lang/:publisher/:year/:no', component: ReadComponent},
+    ]
+  },
+  //
+  // Bible
+  //
   {
     path: 'bible',
     component: SearchComponent,
     data: {title: 'Bibles are coming'}
   },
+  //
+  // Sabbath School Quarterly
+  //
   {
     path: 'ssq',
     component: SearchComponent,
     data: {title: 'SSQ is coming'}
   },
+  //
+  // Home
+  //
   {
     path: 'home',
     component: DashboardComponent,

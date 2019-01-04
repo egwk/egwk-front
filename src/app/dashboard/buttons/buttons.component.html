@@ -14,7 +14,7 @@
   <a routerLink="/ssq" id="egwk-dashboard-button-ssq" class="egwk-dashboard-button button">
     <span class="egwk-dashboard-button-title" i18n>Sabbath School</span>
   </a>
-  <a routerLink="/synch" id="egwk-dashboard-button-synch" class="egwk-dashboard-button button">
+  <a routerLink="/synch" *ngIf="hasPermission('synch')" id="egwk-dashboard-button-synch" class="egwk-dashboard-button button">
     <span class="egwk-dashboard-button-title" i18n>Synch</span>
   </a>
 

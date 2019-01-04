@@ -2,14 +2,39 @@
 
   <div class="egwk-logo button" routerLink="/"></div>
 
-  <ul class="links">
+  <button
+    #mobileMenu
+    mat-button
+    (click)="menuShown = !menuShown"
+    class="hidden-on-not-mobile"
+  >
+    <mat-icon>menu</mat-icon>
+  </button>
+
+  <ul [ngClass]="{
+      'links': true,
+      'top-nav-modules': true,
+      'hidden-on-mobile': !menuShown,
+      'shown': menuShown
+    }">
     <li><a routerLink="books" i18n="@@top-nav-books">Books</a></li>
     <li><a routerLink="bible" i18n="@@top-nav-bible">Bible</a></li>
     <li><a routerLink="hymnals" i18n="@@top-nav-hymnals">Hymnals</a></li>
     <li><a routerLink="ssq" i18n="@@top-nav-ssq">SSQ</a></li>
-    <li><a routerLink="synch" i18n="@@top-nav-synch">Synch</a></li>
-    <li><input type="text" placeholder="Search" i18n-placeholder="@@top-nav-search" name="search"></li>
-    <li><a routerLink="/auth/login" i18n="@@top-nav-synch">Login</a></li>
+    <li><a routerLink="synch" *ngIf="hasPermission('synch')" i18n="@@top-nav-synch">Synch</a></li>
+  </ul>
+  <ul class="links top-nav-tools">
+    <li><input
+      #searchInput
+      type="text"
+      placeholder="Search"
+      i18n-placeholder="@@top-nav-search"
+      name="search"
+      (keydown)="onKeydown($event)"
+    ></li>
+    <li *ngIf="!isLoggedIn()"><a (click)="login()" i18n="@@top-nav-synch">Login</a></li>
+    <li *ngIf="isLoggedIn()"><a (click)="logout()" i18n="@@top-nav-synch">Logout</a></li>
+    <li *ngIf="isLoggedIn()"><a routerLink="/settings">{{ getLoginName() }}</a></li>
   </ul>
 </nav>
 

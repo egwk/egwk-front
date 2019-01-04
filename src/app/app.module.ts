@@ -26,6 +26,7 @@ import {
   MatTooltipModule,
   MatBottomSheetModule,
   MatExpansionModule,
+  MatSnackBarModule,
 } from '@angular/material';
 import { StripHtmlPipe } from './pipes/strip-html.pipe';
 import { HighlightTextPipe } from './pipes/highlight-text.pipe';
@@ -162,6 +163,7 @@ export class MyHammerConfig extends HammerGestureConfig {
     MatTooltipModule,
     MatBottomSheetModule,
     MatExpansionModule,
+    MatSnackBarModule,
   ],
   providers: [
     {

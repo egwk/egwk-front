@@ -193,6 +193,19 @@ ins {
   display: none;
 }
 
+@media (max-width: $with-mobile) {
+  .hidden-on-mobile {
+    display: none;
+  }
+}
+
+@media (min-width: $with-mobile) {
+  .hidden-on-not-mobile {
+    display: none !important;
+  }
+}
+
+
 .button, .router-link {
   cursor: pointer;
 }

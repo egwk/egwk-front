@@ -1,6 +1,8 @@
 @import '../../colors.scss';
+@import '../../variables.scss';
 
 .egwk-search {
+  margin-top: $topmargin;
   //margin: 0px 40px 30px 40px;
 }
 

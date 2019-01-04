@@ -11,6 +11,8 @@ import {WritingsComponent} from "./read/writings/writings.component";
 import {AuthComponent} from "./auth/auth.component";
 import {TocComponent} from "./read/toc/toc.component";
 import {ReadComponent} from "./read/read/read.component";
+import {SynchGuard} from "./synch/synch.guard";
+import {AuthGuard} from "./auth/auth.guard";
 
 export const appRoutes: Routes = [
   //
@@ -39,17 +41,20 @@ export const appRoutes: Routes = [
   {
     path: 'synch',
     component: SynchSelectComponent,
-    data: {title: 'Synch Writings'}
-  },
-  {
-    path: 'synch/:translation',
-    component: SynchComponent,
-    data: {title: 'Synch Writings'}
-  },
-  {
-    path: 'synch/:translation/:page',
-    component: SynchComponent,
-    data: {title: 'Synch Writings'}
+    data: {title: 'Synch Writings'},
+    canActivate: [AuthGuard],
+    children: [
+      {
+        path: ':translation',
+        component: SynchComponent,
+        data: {title: 'Synch Writings'}
+      },
+      {
+        path: ':translation/:page',
+        component: SynchComponent,
+        data: {title: 'Synch Writings'}
+      },
+    ]
   },
   //
   // Hymnals
@@ -85,7 +90,13 @@ export const appRoutes: Routes = [
   {
     path: 'search',
     component: SearchComponent,
-    data: {title: 'Search in the Writings'}
+    data: {title: 'Search in the Writings'},
+    children: [
+      {
+        path: ':query',
+        component: SearchComponent,
+      },
+    ]
   },
   //
   // Read testimonies

@@ -1,7 +1,8 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {EgwkSearchService} from "../services/egwk-search.service";
 import {SearchResultPaginatied} from "../models/search-result.model";
-import {Observable} from "rxjs/internal/Observable";
+import {ActivatedRoute, ParamMap, Router} from "@angular/router";
+import {map, switchMap} from "rxjs/operators";
 
 export class SearchSettings {
   showSimilarsDefault: boolean = false;
@@ -19,17 +20,33 @@ export class SearchSettings {
 })
 export class SearchComponent implements OnInit {
 
+  @ViewChild('query', {read: ElementRef}) query: ElementRef;
+
   result: SearchResultPaginatied;
   currentQuery: string;
   similars = [];
   settings = new SearchSettings();
-  
+
   constructor(
     private searchService: EgwkSearchService,
+    protected activatedRoute: ActivatedRoute,
+    protected router: Router,
   ) {
   }
 
+  searchByRoute() {
+    this.activatedRoute.queryParams
+      .subscribe(params => {
+        let query = params['q'];
+        if (query) {
+          this.query.nativeElement.value = query;
+          this.search('writings', query);
+        }
+      });
+  }
+
   ngOnInit() {
+    this.searchByRoute();
   }
 
   covers($event) {

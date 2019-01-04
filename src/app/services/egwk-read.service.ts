@@ -36,7 +36,7 @@ export class EgwkReadService {
   }
 
   test() {
-    this.authService.accessToken;
+    // this.authService.accessToken;
   }
 
   transformBookList(result: PaginatedModel<BookModel>) {

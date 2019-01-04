@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {AuthGuard} from "../../auth/auth.guard";
 
 @Component({
   selector: 'egwk-dashboard-buttons',
@@ -7,7 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ButtonsComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    protected authGuard: AuthGuard,
+  ) {
+  }
+
+  hasPermission(route: string) {
+    return this.authGuard.hasPermission(route);
+  }
 
   ngOnInit() {
   }

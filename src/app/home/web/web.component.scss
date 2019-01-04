@@ -1,0 +1,25 @@
+@import '../../../colors.scss';
+@import '../../../variables.scss';
+
+@media (max-width: $with-mobile) {
+  .top-nav-modules.links li{
+    //font-size: 0.9rem;
+    //line-height: 2rem;
+    padding: 0 32px;
+  }
+
+  .top-nav-modules {
+    position: fixed;
+    top: $topmargin;
+    left: 0;
+    background-color: $egwk-white;
+    width: 100%;
+    box-shadow: 3px 3px 10px rgba($egwk-black, 0.5);
+    line-height: 2rem;
+  }
+
+  .top-nav-modules.shown {
+    display: block;
+  }
+}
+

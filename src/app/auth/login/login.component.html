@@ -1,23 +1,28 @@
-<form class="egwk-auth-login flex-center">
-  <mat-form-field appearance="outline">
-    <mat-label i18n>E-mail address</mat-label>
-    <input matInput placeholder="E-mail" i18n-placeholder="E-mail"/>
-    <mat-icon matPrefix>perm_identity</mat-icon>
-  </mat-form-field>
-  <mat-form-field appearance="outline">
-    <mat-label i18n>Password</mat-label>
-    <input matInput placeholder="Password" i18n-placeholder="Password" type="password"/>
-  </mat-form-field>
-  <div class="egwk-auth-login-buttons">
-    <button mat-stroked-button i18n>Login</button>
-    <a routerLink="/" class="egwk-auth-social-link" id="egwk-auth-social-facebook">
-      <i class="egwk-auth-social"></i>
-    </a>
-    <a routerLink="/" class="egwk-auth-social-link" id="egwk-auth-social-googleplus">
-      <i class="egwk-auth-social"></i>
-    </a>
-    <a routerLink="/" class="egwk-auth-social-link" id="egwk-auth-social-twitter">
-      <i class="egwk-auth-social"></i>
-    </a>
-  </div>
-</form>
+<div class="egwk-auth-login flex-center" *ngIf="!isLoggedIn() || authRoute">
+  <ng-container *ngIf="isLoggedIn()">
+    <p><ng-container i18n>Logged in as</ng-container> {{username}} <button mat-stroked-button (click)="logout()" i18n>Logout</button></p>
+  </ng-container>
+  <ng-container *ngIf="!isLoggedIn()">
+    <mat-form-field appearance="outline">
+      <mat-label i18n>E-mail address</mat-label>
+      <input matInput placeholder="E-mail" i18n-placeholder="E-mail" [(ngModel)]="username"/>
+      <mat-icon matPrefix>perm_identity</mat-icon>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label i18n>Password</mat-label>
+      <input matInput placeholder="Password" i18n-placeholder="Password" type="password" [(ngModel)]="password"/>
+    </mat-form-field>
+    <div class="egwk-auth-login-buttons">
+      <button mat-stroked-button (click)="login()" i18n>Login</button>
+      <a routerLink="/" class="egwk-auth-social-link" id="egwk-auth-social-facebook">
+        <i class="egwk-auth-social"></i>
+      </a>
+      <a routerLink="/" class="egwk-auth-social-link" id="egwk-auth-social-googleplus">
+        <i class="egwk-auth-social"></i>
+      </a>
+      <a routerLink="/" class="egwk-auth-social-link" id="egwk-auth-social-twitter">
+        <i class="egwk-auth-social"></i>
+      </a>
+    </div>
+  </ng-container>
+</div>

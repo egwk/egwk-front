@@ -94,6 +94,7 @@ nav.top-nav {
   background-color: $egwk-white;
   display: flex;
   justify-content: space-between;
+  box-shadow: 0 0 10px rgba($egwk-primary, 0.3);
 }
 
 
@@ -193,6 +194,14 @@ ins {
   display: none;
 }
 
+.sticky{
+  position: fixed;
+  top: 0;
+  overflow: hidden;
+  z-index: 10;
+  width: 100%;
+}
+
 @media (max-width: $with-mobile) {
   .hidden-on-mobile {
     display: none;
@@ -216,7 +225,7 @@ ins {
 
 @media (max-width: $with-mobile) {
   .top-padding {
-    padding-top: calc(2 * #{$topmargin});
+    //padding-top: calc(2 * #{$topmargin});
   }
 }
 

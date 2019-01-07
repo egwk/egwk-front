@@ -6,6 +6,7 @@ import {Hymnal} from "../models/hymnal.model";
 import {map} from "rxjs/operators";
 import {Hymn} from "../models/hymn.model";
 import {HymnVerse} from "../models/hymn-verse.model";
+import * as _ from "lodash";
 
 @Injectable({
   providedIn: 'root'
@@ -25,7 +26,11 @@ export class EgwkHymnalService {
     return this.http.get<Array<Hymnal>>(AppSettings.HYMNALS_API_URL + language);
   }
 
-  getHymnal(slug: string, hymnNo = null): Observable<Array<Hymn>> {
+  getHymnalMetadata(slug: string): Observable<any> {
+    return this.http.get(AppSettings.HYMNAL_API_URL + slug + '/metadata');
+  }
+
+  getHymnMetadata(slug: string, hymnNo = null): Observable<Array<Hymn>> {
     if (null !== hymnNo) {
       return this.http.get<Array<Hymn>>(AppSettings.HYMNAL_API_URL + slug + '/' + hymnNo);
     }
@@ -40,10 +45,15 @@ export class EgwkHymnalService {
     return this.http.get(AppSettings.HYMN_API_URL + `translate/${language}/${slug}/${no}/${verse}`);
   }
 
-  getScore(type: string, slug: string, no: string, verses: string = '', format = 'png', size = 'normal'): Observable<Blob> {
+  getScore(type: string, slug: string, no: string, verses: string = '', format = 'png', header = 'on', size = 'normal'): Observable<Blob> {
     return this.http.get(AppSettings.HYMN_API_URL +
-      `score/${slug}/${no}/${verses}?type=${type}&format=${format}&size=${size}`,
+      `score/${slug}/${no}/${verses}?type=${type}&format=${format}&size=${size}&header=${header}`,
       {responseType: 'blob'});
+  }
+
+  getScoreImage(slug: string, no: string, type: string = 'png'): Observable<Blob> {
+    no = _.padStart(no, 3, '0');
+    return this.http.get(`/assets/images/hymnals/${slug}/${no}.${type}`, {responseType: 'blob'});
   }
 
 }

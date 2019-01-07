@@ -61,6 +61,7 @@ import { ChapterStepComponent } from './read/chapter-step/chapter-step.component
 import { CircularMenuComponent } from './circular-menu/circular-menu.component';
 import { ParagraphPropertiesComponent } from './read/paragraph-properties/paragraph-properties.component';
 import { CommentsComponent, CommentComponent } from './comments/comments.component';
+import { EditComponent } from './hymnal/edit/edit.component';
 
 @Injectable({
   providedIn: 'root',
@@ -133,6 +134,7 @@ export class MyHammerConfig extends HammerGestureConfig {
     ParagraphPropertiesComponent,
     CommentsComponent,
     CommentComponent,
+    EditComponent,
   ],
   imports: [
     HttpClientModule,

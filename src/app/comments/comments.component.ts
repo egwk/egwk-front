@@ -9,7 +9,8 @@ export class CommentsComponent implements OnInit {
 
   @Input() for: string;
   @Input() type: string;
-  comments = [
+  comments = [];
+    /*[
     {
       id: '',
       user:	'me',
@@ -118,7 +119,7 @@ export class CommentsComponent implements OnInit {
       date: '2019-01-01',
       comment: 'My important notes'
     },
-  ];
+  ];*/
 
   constructor() { }
 

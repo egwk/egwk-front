@@ -1,3 +1,6 @@
+@import '../../../colors.scss';
+@import '../../../variables.scss';
+
 .egwk-search-result-book-title {
   font-size: 1.1rem;
   font-weight: bold;
@@ -12,7 +15,7 @@
 
 .egwk-search-result-coverage {
   font-family: monospace;
-  font-size: 0.75rem;
+  font-size: $small-font;
 }
 
 .egwk-search-tools-button {

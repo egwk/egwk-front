@@ -13,6 +13,7 @@ import {TocComponent} from "./read/toc/toc.component";
 import {ReadComponent} from "./read/read/read.component";
 import {SynchGuard} from "./synch/synch.guard";
 import {AuthGuard} from "./auth/auth.guard";
+import {EditComponent} from "./hymnal/edit/edit.component";
 
 export const appRoutes: Routes = [
   //
@@ -83,6 +84,18 @@ export const appRoutes: Routes = [
     path: 'hymn/:hymnal/:no',
     component: HymnComponent,
     data: {title: 'Hymnal'}
+  },
+  {
+    path: 'edit/hymn',
+    canActivate: [AuthGuard],
+    children: [
+      {
+        path: ':hymnal/:no',
+        component: EditComponent,
+        data: {title: 'Edit Component'}
+      },
+    ]
+
   },
   //
   // Search

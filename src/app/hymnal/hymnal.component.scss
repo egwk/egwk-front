@@ -1,0 +1,23 @@
+@import '../../colors.scss';
+@import '../../variables.scss';
+
+.egwk-hymnal {
+  width: 100%;
+}
+
+@media (min-width: $with-mobile) {
+  .egwk-hymn-list-wrapper {
+    width: 30rem;
+    margin: $topmargin auto;
+  }
+}
+
+@media (max-width: $with-mobile) {
+  .egwk-hymn-list-wrapper {
+    margin: $topmargin $sidemargin;
+  }
+}
+
+.egwk-hymn-item {
+  cursor: pointer;
+}

@@ -1,6 +1,6 @@
 <div class="flex-wrap flex-center top-padding" *ngIf="toc; else loading">
   <div>
-    <breadcrumbs [items]="[
+    <breadcrumbs [items]="!metadata ? [] : [
       {title: 'Home', uri: '/', icon: 'home'},
       {title: 'Books', uri: '/books'},
       {title: getCollectionName(metadata.primary_collection_text_id), uri: '/books', 'fragment': metadata.primary_collection_text_id}

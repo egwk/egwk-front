@@ -1,4 +1,4 @@
-<div class="full-height flex-wrap egwk-hymnals" *ngIf="hymnals; else loading">
+<div class="full-height flex-wrap egwk-hymnals top-padding" *ngIf="hymnals; else loading">
 
   <div class="egwk-hymnal-list-wrapper">
     <div class="egwk-hymnal-item" [routerLink]="getHymnalUrl(hymnal)" *ngFor="let hymnal of hymnals">

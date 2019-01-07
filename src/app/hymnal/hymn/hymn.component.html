@@ -1,21 +1,50 @@
-<div class="egwk-hymn">
+<div class="top-padding">
+  <breadcrumbs [items]="[
+      {title: 'Home', uri: '/', icon: 'home'},
+      {title: 'Hymnals', uri: '/hymnals'},
+      {
+       title: hymnalMetadata.title,
+       uri: '/hymnal/' + hymnalMetadata.slug,
+       alt: hymnalMetadata.title + ' (' + hymnalMetadata.publisher + ', ' + hymnalMetadata.year + ')'
+      },
+      {title: hymn.hymn_no ? hymn.hymn_no + '. ' + hymn.title : ''},
+      {
+       condition: canEdit(),
+       icon: 'edit',
+       uri: '/edit/hymn/' + hymnalMetadata.slug + '/' + hymn.hymn_no,
+       alt: 'Edit Hymn'
+      }
+  ]"></breadcrumbs>
   <loading *ngIf="!hymn.hymn_no"></loading>
-  <div class="egwk-hymn-wrapper">
-    <h1>
-      <ng-container *ngIf="hymn.hymn_no">
-      {{ hymn.hymn_no }}. {{ hymn.title }}
-      </ng-container>
-    </h1>
-    <div class="egwk-hymn-verse" *ngFor="let verse of hymnVerses">
-      <span class="egwk-hymn-verse-no">{{ verse.verse_no }}.</span>
-      <span class="egwk-hymn-verse-content">{{ verse.content }}</span>
+  <div class="egwk-hymn-wrapper" *ngIf="hymn.hymn_no" #hymnWrapper>
+    <div class="egwk-hymn" #hymnBox>
+      <h1>
+        <ng-container *ngIf="hymn.hymn_no">
+          {{ hymn.hymn_no }}. {{ hymn.title }}
+        </ng-container>
+      </h1>
+      <div class="egwk-hymn-verse" *ngFor="let verse of hymnVerses">
+        <span class="egwk-hymn-verse-no">{{ verse.verse_no }}.</span>
+        <span class="egwk-hymn-verse-content">{{ verse.content }}</span>
+      </div>
+      <div class="egwk-hymn-metadata" *ngIf="hymn">
+        <p class="egwk-hymn-" *ngIf="hymn.composer">{{ hymn.composer }}</p>
+        <p class="egwk-hymn-" *ngIf="hymn.poet">{{ hymn.poet }}, {{ hymn.tune_year }}</p>
+        <p class="egwk-hymn-" *ngIf="hymn.arranger">{{ hymn.arranger }}</p>
+        <p class="egwk-hymn-" *ngIf="hymn.tune">{{ hymn.tune }}, {{ hymn.tune_year }}</p>
+      </div>
     </div>
-    <div class="egwk-hymn-metadata" *ngIf="hymn">
-      <p class="egwk-hymn-" *ngIf="hymn.composer">{{ hymn.composer }}</p>
-      <p class="egwk-hymn-" *ngIf="hymn.poet">{{ hymn.poet }}, {{ hymn.tune_year }}</p>
-      <p class="egwk-hymn-" *ngIf="hymn.arranger">{{ hymn.arranger }}</p>
-      <p class="egwk-hymn-" *ngIf="hymn.tune">{{ hymn.tune }}, {{ hymn.tune_year }}</p>
+    <loading *ngIf="hymn.hymn_no && !(scoreImage || noScore)"></loading>
+    <div
+      [style.marginTop.px]="topShift"
+      [ngClass]="{
+      'egwk-hymn-score-image-wrapper': true,
+        hidden: !scoreImage
+      }"
+      #scoreImageWrapper
+    >
+      <img class="egwk-hymn-score-image" [src]="scoreImage" #scoreImageElement/>
     </div>
-    <img [src]="scoreImage" *ngIf="scoreImage">
   </div>
 </div>
+<!--<div class="egwk-hymn-score"></div>-->

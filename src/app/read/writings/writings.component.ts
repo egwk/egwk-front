@@ -13,6 +13,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 })
 export class WritingsComponent implements OnInit {
 
+  grid: boolean = false;
   booksQuery: Array<any>;
   columns = ['tr_code', 'tr_title', 'translator', 'title', 'publisher', 'year', 'church_approved'];
   fragment: any;

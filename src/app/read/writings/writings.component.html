@@ -2,58 +2,80 @@
   <breadcrumbs [items]="[
       {title: 'Home', uri: '/', icon: 'home'}
     ]"></breadcrumbs>
+  <div class="egwk-read-toolbar">
+    <button mat-button (click)="grid = !grid">
+      <mat-icon *ngIf="!grid">grid_on</mat-icon>
+      <mat-icon *ngIf="grid">view_list</mat-icon>
+    </button>
+  </div>
   <div class="egwk-read-collection" *ngFor="let collection of booksQuery">
     <a [id]="collection.collectionId"></a>
     <h1>{{collection.collection}}</h1>
-    <mat-table [dataSource]="collection.books">
 
-      <ng-container cdkColumnDef="tr_code">
-        <mat-header-cell *matHeaderCellDef></mat-header-cell>
-        <mat-cell *matCellDef="let row">{{row.tr_code}}</mat-cell>
-      </ng-container>
+    <ng-container *ngIf="!grid; else gridView">
+      <mat-table [dataSource]="collection.books">
 
-      <ng-container cdkColumnDef="tr_title">
-        <mat-header-cell *matHeaderCellDef>Translated title</mat-header-cell>
-        <mat-cell *matCellDef="let row">{{row.tr_title}}</mat-cell>
-      </ng-container>
+        <ng-container cdkColumnDef="tr_code">
+          <mat-header-cell *matHeaderCellDef></mat-header-cell>
+          <mat-cell *matCellDef="let row">{{row.tr_code}}</mat-cell>
+        </ng-container>
 
-      <ng-container cdkColumnDef="translator">
-        <mat-header-cell *matHeaderCellDef>Translator</mat-header-cell>
-        <mat-cell *matCellDef="let row">{{row.translator}}</mat-cell>
-      </ng-container>
+        <ng-container cdkColumnDef="tr_title">
+          <mat-header-cell *matHeaderCellDef>Translated title</mat-header-cell>
+          <mat-cell *matCellDef="let row">{{row.tr_title}}</mat-cell>
+        </ng-container>
 
-      <ng-container cdkColumnDef="title">
-        <mat-header-cell *matHeaderCellDef>Original code / title</mat-header-cell>
-        <mat-cell *matCellDef="let row" [innerHTML]="row.book_code + ' / ' + row.title"></mat-cell>
-      </ng-container>
+        <ng-container cdkColumnDef="translator">
+          <mat-header-cell *matHeaderCellDef>Translator</mat-header-cell>
+          <mat-cell *matCellDef="let row">{{row.translator}}</mat-cell>
+        </ng-container>
 
-      <ng-container cdkColumnDef="publisher">
-        <mat-header-cell *matHeaderCellDef>Publisher</mat-header-cell>
-        <mat-cell *matCellDef="let row">
-          <egwk-icon type="publisher">{{ row.publisher }}</egwk-icon>
-        </mat-cell>
-      </ng-container>
+        <ng-container cdkColumnDef="title">
+          <mat-header-cell *matHeaderCellDef>Original code / title</mat-header-cell>
+          <mat-cell *matCellDef="let row" [innerHTML]="row.book_code + ' / ' + row.title"></mat-cell>
+        </ng-container>
 
-      <ng-container cdkColumnDef="year">
-        <mat-header-cell *matHeaderCellDef>Year</mat-header-cell>
-        <mat-cell *matCellDef="let row">{{row.year}}</mat-cell>
-      </ng-container>
+        <ng-container cdkColumnDef="publisher">
+          <mat-header-cell *matHeaderCellDef>Publisher</mat-header-cell>
+          <mat-cell *matCellDef="let row">
+            <egwk-icon type="publisher">{{ row.publisher }}</egwk-icon>
+          </mat-cell>
+        </ng-container>
 
-      <ng-container cdkColumnDef="church_approved">
-        <mat-header-cell *matHeaderCellDef></mat-header-cell>
-        <mat-cell *matCellDef="let row">
-          <egwk-icon-sda *ngIf="row.church_approved"></egwk-icon-sda>
-        </mat-cell>
-      </ng-container>
+        <ng-container cdkColumnDef="year">
+          <mat-header-cell *matHeaderCellDef>Year</mat-header-cell>
+          <mat-cell *matCellDef="let row">{{row.year}}</mat-cell>
+        </ng-container>
 
-      <mat-header-row *matHeaderRowDef="columns"></mat-header-row>
+        <ng-container cdkColumnDef="church_approved">
+          <mat-header-cell *matHeaderCellDef></mat-header-cell>
+          <mat-cell *matCellDef="let row">
+            <egwk-icon-sda *ngIf="row.church_approved"></egwk-icon-sda>
+          </mat-cell>
+        </ng-container>
 
-      <mat-row *matRowDef="let row; columns: columns" [routerLink]="row.toc_uri" class="router-link"></mat-row>
+        <mat-header-row *matHeaderRowDef="columns"></mat-header-row>
 
-    </mat-table>
+        <mat-row *matRowDef="let row; columns: columns" [routerLink]="row.toc_uri" class="router-link"></mat-row>
+
+      </mat-table>
+    </ng-container>
+
+    <ng-template #gridView>
+      <div *ngFor="let book of collection.books">
+        {{ book.book_id }}
+        {{ book.tr_title }}
+        {{ book.translator }}
+        {{ book.toc_uri }}
+        {{ book.publisher_name }}
+        {{ book.year }}
+      </div>
+    </ng-template>
+
   </div>
 </div>
 
 <ng-template #loading>
   <loading></loading>
 </ng-template>
+

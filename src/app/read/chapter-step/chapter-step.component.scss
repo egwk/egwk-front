@@ -9,14 +9,15 @@
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
-  margin: 32px 0;
+  margin: $topmargin 0;
   padding: 1rem;
-  font-size: 0.75rem;
+  font-size: $small-font;
 }
 
 .egwk-chapter-step button {
   display: block;
   word-wrap: break-word;
+  white-space: normal;
 }
 
 @media (min-width: $with-mobile) {

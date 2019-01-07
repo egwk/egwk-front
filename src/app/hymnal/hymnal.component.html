@@ -1,5 +1,20 @@
-<div class="egwk-hymnal">
+<div class="egwk-hymnal top-padding">
+  <breadcrumbs [items]="[
+      {title: 'Home', uri: '/', icon: 'home'},
+      {title: 'Hymnals', uri: '/hymnals'},
+      {
+       title: hymnalMetadata.title,
+       alt: hymnalMetadata.title + ' (' + hymnalMetadata.publisher + ', ' + hymnalMetadata.year + ')'
+      }
+    ]"></breadcrumbs>
   <div class="egwk-hymn-list-wrapper">
+    <h1 class="egwk-hymnal-title">
+      <span>{{hymnalMetadata.title}}</span>
+      <br/>
+      <small *ngIf="hymnalMetadata.publisher && hymnalMetadata.year">
+        ({{hymnalMetadata.publisher}}, {{hymnalMetadata.year}})
+      </small>
+    </h1>
     <div class="egwk-hymn-item" [routerLink]="getHymnUrl(hymn)" *ngFor="let hymn of hymnal">
       <span class="egwk-hymn-item-title">{{ hymn.hymn_no }}. {{ hymn.title }}</span>
     </div>

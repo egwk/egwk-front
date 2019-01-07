@@ -6,7 +6,7 @@ import {MAT_BOTTOM_SHEET_DATA} from "@angular/material/typings/bottom-sheet";
 @Component({
   selector: 'paragraph-properties',
   templateUrl: './paragraph-properties.component.html',
-  styleUrls: ['./paragraph-properties.component.css']
+  styleUrls: ['./paragraph-properties.component.scss']
 })
 export class ParagraphPropertiesComponent implements OnInit {
 

@@ -13,6 +13,20 @@
   word-wrap: break-word;
 }
 
+.egwk-paragraph-column-original {
+}
+
+@media (max-width: $with-mobile) {
+  .egwk-paragraph-column {
+    width: 99%;
+  }
+
+  .egwk-paragraph-column-original {
+    text-align: right;
+  }
+
+}
+
 .egwk-paragraph-column-full {
   width: $almost-full;
 }
@@ -22,10 +36,6 @@
   color: $egwk-primary;
   display: inline-block;
   margin-left: 8px;
-}
-
-.egwk-paragraph-column-original {
-
 }
 
 .egwk-paragraph-column-hidden {
@@ -41,3 +51,4 @@
   font-weight: bold;
   font-size: 1.1rem;
 }
+

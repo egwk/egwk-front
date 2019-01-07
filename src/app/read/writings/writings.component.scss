@@ -18,17 +18,18 @@
   flex-grow: 0;
 }
 
-.mat-column-publisher {
+.mat-column-publisher, .mat-column-church_approved {
   flex-grow: 0;
+  justify-content: center;
+}
+
+.mat-column-church_approved {
+  display: none;
 }
 
 .mat-column-year {
   flex-grow: 1;
-}
-
-.mat-column-church_approved {
-  flex-grow: 0;
-  display: none;
+  justify-content: center;
 }
 
 .egwk-read-collection {
@@ -65,4 +66,8 @@
     margin: $topmargin 3rem 0 3rem;
   }
 
+}
+
+.egwk-read-toolbar{
+  width: 100%;
 }

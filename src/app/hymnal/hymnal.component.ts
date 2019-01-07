@@ -4,11 +4,12 @@ import {switchMap} from "rxjs/operators";
 import {EgwkHymnalService} from "../services/egwk-hymnal.service";
 import {Hymn} from "../models/hymn.model";
 import {AppSettings} from "../app.settings";
+import {Hymnal} from "../models/hymnal.model";
 
 @Component({
   selector: 'app-hymnal',
   templateUrl: './hymnal.component.html',
-  styleUrls: ['./hymnal.component.css']
+  styleUrls: ['./hymnal.component.scss']
 })
 export class HymnalComponent implements OnInit {
 
@@ -18,13 +19,23 @@ export class HymnalComponent implements OnInit {
   ) {
   }
 
+  hymnalMetadata: Hymnal = new Hymnal();
   hymnal: Array<Hymn>;
+
+  getHymnalMetadata(slug) {
+    this.hymnalService
+      .getHymnalMetadata(slug)
+      .subscribe(hymnal => {
+        this.hymnalMetadata = hymnal.shift();
+      });
+  }
 
   loadByroute() {
     return this.route.paramMap.pipe(
       switchMap((params: ParamMap) => {
           let slug = params.get('hymnal');
-          return this.hymnalService.getHymnal(slug);
+          this.getHymnalMetadata(slug);
+          return this.hymnalService.getHymnMetadata(slug);
         }
       )
     )

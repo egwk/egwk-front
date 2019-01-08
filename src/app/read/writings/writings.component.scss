@@ -11,25 +11,26 @@
 }
 
 .mat-column-translator {
-  flex-grow: 3;
+  flex-grow: 0;
 }
 
 .mat-column-title {
   flex-grow: 0;
+  display: none;
 }
 
-.mat-column-publisher, .mat-column-church_approved {
-  flex-grow: 0;
+
+.mat-column-publisher {
+  flex-grow: 2;
+}
+
+.mat-column-publisher, .mat-column-church_approved, .mat-column-year {
   justify-content: center;
 }
 
 .mat-column-church_approved {
+  flex-grow: 0;
   display: none;
-}
-
-.mat-column-year {
-  flex-grow: 1;
-  justify-content: center;
 }
 
 .egwk-read-collection {
@@ -41,6 +42,22 @@
   .egwk-read {
     margin: $topmargin 0 0 0;
   }
+  .mat-column-translator {
+    display: none;
+  }
+  .egwk-read-table {
+    line-height: 1em;
+  }
+
+  .egwk-read-book-cards {
+    justify-content: space-evenly;
+  }
+
+  .egwk-read-book-card {
+    max-width: 40%;
+    margin: 16px 0;
+  }
+
 }
 
 @media (min-width: $with-mobile) {
@@ -51,15 +68,17 @@
   .egwk-read {
     margin: $topmargin 1rem 0 1rem;
   }
+  .mat-column-translator {
+    flex-grow: 3;
+  }
+  .mat-column-year {
+    flex-grow: 1;
+  }
 }
 
 @media (min-width: $with-tablet) {
   .mat-column-title {
     flex-grow: 5;
-  }
-
-  .mat-column-publisher {
-    flex-grow: 2;
   }
 
   .egwk-read {
@@ -68,6 +87,36 @@
 
 }
 
-.egwk-read-toolbar{
+.egwk-read-toolbar {
   width: 100%;
+}
+
+.egwk-read-book-cards {
+  display: flex;
+  flex-wrap: wrap;
+  // justify-content: space-between;
+}
+
+.egwk-read-book-card {
+  width: 150px;
+  margin: 16px 16px 32px 0;
+}
+
+.egwk-read-book-card-title {
+  word-break: break-word;
+  font-size: 1rem;
+}
+
+.egwk-read-book-card-subtitle {
+  word-break: break-word;
+}
+
+.egwk-read-book-card-image {
+  filter: grayscale(85%);
+  transition: filter .2s linear;
+}
+
+.egwk-read-book-card:hover .egwk-read-book-card-image {
+  filter: none;
+  transition: filter .2s linear;
 }

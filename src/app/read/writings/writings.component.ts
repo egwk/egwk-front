@@ -5,6 +5,7 @@ import {PaginatedModel} from "../../models/paginated.model";
 import {AppSettings} from "../../app.settings";
 import {LocalStorageService} from "../../services/local-storage.service";
 import {ActivatedRoute, Router} from "@angular/router";
+import {MatTableDataSource} from "@angular/material";
 
 @Component({
   selector: 'app-egw-writings',
@@ -26,6 +27,15 @@ export class WritingsComponent implements OnInit {
   ) {
   }
 
+  applyFilter(filterValue: string, dataSource) {
+    dataSource.filter = filterValue.trim().toLowerCase();
+  }
+
+  toggleGrid() {
+    this.grid = !this.grid;
+    this.ls.set('writings.grid', this.grid ? 'on' : 'off');
+  }
+
   getBooks() {
     const booksQueryJson = this.ls.get('books');
     if (booksQueryJson) {
@@ -35,12 +45,15 @@ export class WritingsComponent implements OnInit {
         .getBooks()
         .subscribe(result => {
           this.booksQuery = result;
+          // this.booksQuery
+          //      .map(collection => collection.bookDs = new MatTableDataSource(collection.books));
           this.ls.set('books', this.booksQuery);
         });
     }
   }
 
   ngOnInit() {
+    this.grid = this.ls.get('writings.grid') === 'on';
     // this.readService.test();
     this.route.fragment.subscribe(fragment => {
       this.fragment = fragment;

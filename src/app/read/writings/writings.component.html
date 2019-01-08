@@ -3,7 +3,7 @@
       {title: 'Home', uri: '/', icon: 'home'}
     ]"></breadcrumbs>
   <div class="egwk-read-toolbar">
-    <button mat-button (click)="grid = !grid">
+    <button mat-button (click)="toggleGrid()">
       <mat-icon *ngIf="!grid">grid_on</mat-icon>
       <mat-icon *ngIf="grid">view_list</mat-icon>
     </button>
@@ -13,7 +13,12 @@
     <h1>{{collection.collection}}</h1>
 
     <ng-container *ngIf="!grid; else gridView">
-      <mat-table [dataSource]="collection.books">
+
+      <!--<mat-form-field>-->
+        <!--<input matInput (keyup)="applyFilter($event.target.value, collection.bookDs)" placeholder="Filter">-->
+      <!--</mat-form-field>-->
+
+      <mat-table class="egwk-read-table" [dataSource]="collection.books">
 
         <ng-container cdkColumnDef="tr_code">
           <mat-header-cell *matHeaderCellDef></mat-header-cell>
@@ -62,13 +67,19 @@
     </ng-container>
 
     <ng-template #gridView>
-      <div *ngFor="let book of collection.books">
-        {{ book.book_id }}
-        {{ book.tr_title }}
-        {{ book.translator }}
-        {{ book.toc_uri }}
-        {{ book.publisher_name }}
-        {{ book.year }}
+      <div class="egwk-read-book-cards">
+        <mat-card class="egwk-read-book-card router-link" *ngFor="let book of collection.books"
+                  [routerLink]="book.toc_uri">
+          <img mat-card-image class="egwk-read-book-card-image"
+               [src]="'/assets/images/covers/' + book.book_id + '_m.jpg'"
+               [alt]="book.tr_title + ', ' + book.translator">
+          <mat-card-header>
+            <!--<div mat-card-avatar class="egwk-read-book-header-image"></div>-->
+            <mat-card-title class="egwk-read-book-card-title">{{ book.tr_title }}</mat-card-title>
+            <mat-card-subtitle class="egwk-read-book-card-subtitle">{{ book.publisher_name }},
+              {{ book.year }}</mat-card-subtitle>
+          </mat-card-header>
+        </mat-card>
       </div>
     </ng-template>
 

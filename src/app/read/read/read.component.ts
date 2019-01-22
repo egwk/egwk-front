@@ -51,6 +51,7 @@ export class ReadComponent implements OnInit {
     });
   }
 
+
   toggleShowOriginal() {
     this.showOriginal = !this.showOriginal;
   }

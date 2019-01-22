@@ -30,11 +30,11 @@
       <span>Search in:</span>
       <ul class="links">
         <li><a (click)="search('writings', query.value)">Writings</a></li>
-        <li><a (click)="search('merged', query.value)">Merged</a></li>
-        <li><a (click)="search('extended', query.value)">Extended</a></li>
+        <!--li><a (click)="search('*', query.value)">Everywhere</a></li>
         <li><a (click)="search('bible', query.value)">Bible</a></li>
         <li><a (click)="search('hymnal', query.value)">Hymnal</a></li>
         <li><a (click)="search('ssq', query.value)">SSQ</a></li>
+        <li><a (click)="search('other', query.value)">Other</a></li-->
       </ul>
 
     </div>
@@ -42,6 +42,16 @@
   </div>
 
   <loading *ngIf="result === null"></loading>
+
+  <mat-paginator *ngIf="result && result.total > result.per_page"
+                 [length]="result.total"
+                 [showFirstLastButtons]="true"
+                 [hidePageSize]="false"
+                 [pageIndex]="result.current_page - 1"
+                 [pageSize]="result.per_page"
+                 [pageSizeOptions]="[5, 10, 25, 100]"
+                 (page)="pageEvent($event)">
+  </mat-paginator>
 
   <ol class="egwk-search-results" *ngIf="result">
     <li class="egwk-search-result" *ngFor="let item of result?.data">

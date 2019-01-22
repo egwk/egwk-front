@@ -7,8 +7,14 @@ import {Component, Input, OnInit} from '@angular/core';
 })
 export class ChapterStepComponent implements OnInit {
 
-  @Input()
-  nav: any;
+  @Input('prev-uri')
+  prevUri: string;
+  @Input('next-uri')
+  nextUri: string;
+  @Input('prev-label')
+  prevLabel: string;
+  @Input('next-label')
+  nextLabel: string;
 
   constructor() { }
 

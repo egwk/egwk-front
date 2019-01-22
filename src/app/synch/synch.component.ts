@@ -384,7 +384,13 @@ export class SynchComponent implements OnInit {
         case 'ArrowDown':
           this.overrideDefault($event);
           if ($event.ctrlKey) {
-            this.mergeDown(index, $event.shiftKey ? "\n" : ' ');
+            let glue = ' ';
+            if ($event.shiftKey && $event.altKey) {
+              glue = " — ";
+            } else if ($event.shiftKey) {
+              glue = "\n";
+            }
+            this.mergeDown(index, glue);
           } else {
             let nextParaId = this.indexMapRev.get(index + 1);
             this.activate(nextParaId);

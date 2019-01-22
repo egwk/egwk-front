@@ -1,46 +1,71 @@
-<nav class="top-nav">
+<header id="egwk-header">
+  <nav class="top-nav">
 
-  <div class="egwk-logo button" routerLink="/"></div>
+    <div class="egwk-logo button" routerLink="/"></div>
 
-  <button
-    #mobileMenu
-    mat-button
-    (click)="menuShown = !menuShown"
-    class="hidden-on-not-mobile"
-  >
-    <mat-icon>menu</mat-icon>
-  </button>
+    <button
+      #mobileMenu
+      mat-button
+      (click)="menuShown = !menuShown"
+      class="hidden-on-not-mobile"
+    >
+      <mat-icon>menu</mat-icon>
+    </button>
 
-  <ul [ngClass]="{
+    <ul [ngClass]="{
       'links': true,
       'top-nav-modules': true,
       'hidden-on-mobile': !menuShown,
       'shown': menuShown
     }">
-    <li><a routerLink="books" i18n="@@top-nav-books">Books</a></li>
-    <!--<li><a routerLink="bible" i18n="@@top-nav-bible">Bible</a></li>-->
-    <li><a routerLink="hymnals" i18n="@@top-nav-hymnals">Hymnals</a></li>
-    <!--<li><a routerLink="ssq" i18n="@@top-nav-ssq">SSQ</a></li>-->
-    <li><a routerLink="synch" *ngIf="hasPermission('synch')" i18n="@@top-nav-synch">Synch</a></li>
-  </ul>
-  <ul class="links top-nav-tools">
-    <li><input
-      #searchInput
-      type="text"
-      placeholder="Search"
-      i18n-placeholder="@@top-nav-search"
-      name="search"
-      (keydown)="onKeydown($event)"
-    ></li>
-    <li *ngIf="!isLoggedIn()"><a (click)="login()" i18n="@@top-nav-synch">Login</a></li>
-    <li *ngIf="isLoggedIn()"><a (click)="logout()" i18n="@@top-nav-synch">Logout</a></li>
-    <li *ngIf="isLoggedIn()"><a routerLink="/settings">{{ getLoginName() }}</a></li>
-  </ul>
-</nav>
+      <li><a routerLink="books" i18n="@@top-nav-books">Books</a></li>
+      <!--<li><a routerLink="bible" i18n="@@top-nav-bible">Bible</a></li>-->
+      <li><a routerLink="hymnals" i18n="@@top-nav-hymnals">Hymnals</a></li>
+      <!--<li><a routerLink="ssq" i18n="@@top-nav-ssq">SSQ</a></li>-->
+      <li><a routerLink="synch" *ngIf="hasPermission('synch')" i18n="@@top-nav-synch">Synch</a></li>
+    </ul>
+    <ul class="links top-nav-tools">
+      <li><input
+        #searchInput
+        type="text"
+        placeholder="Search"
+        i18n-placeholder="@@top-nav-search"
+        name="search"
+        (keydown)="onKeydown($event)"
+      ></li>
+      <li *ngIf="!isLoggedIn()"><a (click)="login()" i18n="@@top-nav-synch">Login</a></li>
+      <li *ngIf="isLoggedIn()"><a (click)="logout()" i18n="@@top-nav-synch">Logout</a></li>
+      <li *ngIf="isLoggedIn()"><a routerLink="/settings">{{ getLoginName() }}</a></li>
+    </ul>
+  </nav>
+</header>
 
-<div id="egwk-body">
+<main id="egwk-body">
 
   <router-outlet #routerOutlet="outlet"></router-outlet>
 
-</div>
+</main>
 
+<footer id="egwk-footer">
+  <!-- TODO -->
+  <div class="egwk-logo-white button" routerlink="/"></div>
+  <div>© {{ year }}. Ellen Gould White Könyvtár</div>
+  <div class="col-md-4 pull-right-xs">
+    <a href="/">Főoldal</a>
+    |
+    <a routerLink='/books'>Minden könyv</a>
+    |
+    <a routerLink='/help'>Segítség</a>
+    |
+    <a routerLink='/help/faq'>Gy.I.K.</a>
+    |
+    <a routerLink='/help/about'>Rólunk</a>
+    |
+    <a routerLink='/help/usage'>Esettanulmányok</a>
+    |
+    <a routerLink='/help/support'>Támogatás, projektek</a>
+    |
+    <a href="https://www.youtube.com/channel/UC93fz2oMOz3HatTd768zUVg/featured" rel="publisher"
+       target="_new">YouTube</a>
+  </div>
+</footer>

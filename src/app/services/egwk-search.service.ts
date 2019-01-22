@@ -1,8 +1,9 @@
 import {Injectable} from '@angular/core';
 import {Observable} from "rxjs/internal/Observable";
 import {AppSettings} from "../app.settings";
-import {SearchResultPaginatied} from "../models/search-result.model";
+import {SearchResult, SearchResultPaginatied} from "../models/search-result.model";
 import {HttpClient} from "@angular/common/http";
+import {map} from "rxjs/operators";
 
 @Injectable({
   providedIn: 'root'
@@ -14,8 +15,9 @@ export class EgwkSearchService {
   ) {
   }
 
-  search(phrase: string, covers: number = null, covered: number = null, reference: string = null): Observable<SearchResultPaginatied> {
-    let uri = AppSettings.API_URL + `reader/search/cluster?query=${phrase}`;
+  search(phrase: string, covers: number = null, covered: number = null, reference: string = null, page = 1, perPage = 25): Observable<SearchResultPaginatied> {
+    let lang = 'hu'; // todo
+    let uri = AppSettings.API_URL + `reader/search/cluster/${lang}?query=${phrase}`;
 
     if (covers !== null && covered === null) {
       uri += `&cover=${covers}`;
@@ -27,7 +29,23 @@ export class EgwkSearchService {
       uri += `&reference=${reference}`;
     }
 
-    return this.http.get<SearchResultPaginatied>(uri);
+    if (page > 1) {
+      uri += `&page=${page}`;
+    }
+
+    if (perPage != 25) {
+      uri += `&per_page=${perPage}`;
+    }
+
+    return this.http.get<SearchResultPaginatied>(uri)
+      .pipe(
+        map(item => {
+          if (typeof item.data === 'object') {
+            item.data = Object.values(item.data);
+          }
+          return item;
+        })
+      );
   }
 
 }

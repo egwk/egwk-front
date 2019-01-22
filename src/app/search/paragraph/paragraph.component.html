@@ -21,13 +21,32 @@
   >[it covers reference: {{ similarity.covers }}% &middot; it's covered by reference: {{ similarity.covered }}%]</span>
   </div>
 
-  <p>
-  <span *ngIf="parent === null || !settings.showDiff"
-        class="egwk-search-result-content"
-        [innerHTML]="paragraph.content | striphtml | highlightText:currentQuery"></span>
-    <span *ngIf="parent !== null && settings.showDiff"
-          class="egwk-search-result-content"
-          [innerHTML]="diffHtml(parent.content | striphtml, paragraph.content | striphtml) | showDel:settings.showDeletions | highlightText:currentQuery"></span>
-    <span class="egwk-refcode">{{ ' [' + paragraph.para_id + ']' }} {{ ' {' + paragraph.refcode_short + '}' }}</span>
-  </p>
+  <div class="egwk-search-paragraph">
+    <p [ngClass]="{
+      'has-translation': paragraph.translations.length > 0,
+      'is-original': true
+    }">
+      <span *ngIf="parent === null || !settings.showDiff"
+            class="egwk-search-result-content"
+            [innerHTML]="paragraph.content | striphtml | highlightText:currentQuery"
+      ></span>
+      <span *ngIf="parent !== null && settings.showDiff"
+            class="egwk-search-result-content"
+            [innerHTML]="diffHtml(parent.content | striphtml, paragraph.content | striphtml) | showDel:settings.showDeletions | highlightText:currentQuery"
+      ></span>
+      <span class="egwk-refcode">{{ ' [' + paragraph.para_id + ']' }} {{ ' {' + paragraph.refcode_short + '}' }}</span>
+    </p>
+    <p
+      [ngClass]="{
+        'has-translation': paragraph.translations.length > 0,
+        'is-translation': true
+       }"
+      *ngIf="paragraph.translations.length > 0">
+      <mat-tab-group>
+        <mat-tab
+          *ngFor="let tr_paragraph of paragraph.translations"
+          [label]="tr_paragraph.publisher + ', ' + tr_paragraph.year + '.'">{{ tr_paragraph.content }}</mat-tab>
+      </mat-tab-group>
+    </p>
+  </div>
 </ng-container>

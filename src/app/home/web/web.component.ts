@@ -15,6 +15,7 @@ import {AuthGuard} from "../../auth/auth.guard";
 export class WebComponent implements OnInit {
 
   menuShown: boolean = false;
+  year: number;
   @ViewChild('mobileMenu', {read: ElementRef}) mobileMenu: ElementRef;
   @ViewChild('searchInput', {read: ElementRef}) searchInput: ElementRef;
 
@@ -38,6 +39,7 @@ export class WebComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.year = new Date().getFullYear();
   }
 
   login() {

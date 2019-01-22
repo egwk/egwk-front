@@ -22,4 +22,5 @@ export interface SimilarParagraph extends ParagraphModel{
   book_title: string;
   section_title?: (null | string)[];
   chapter_title: string;
+  translations?: (null)[] | null;
 }

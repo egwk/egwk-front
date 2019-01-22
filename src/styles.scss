@@ -47,12 +47,51 @@
 }
 
 html, body {
-  background-color: $egwk-white;
-  height: 100vh;
   color: $egwk-gray;
+  background-color: $egwk-white;
 }
 
-html, body, textarea {
+html {
+  height: 100vh;
+  //height: 100%;
+  box-sizing: border-box;
+}
+
+body {
+  position: relative;
+  margin: 0;
+  padding-top: 3rem;
+  padding-bottom: 10rem;
+  min-height: 100%;
+}
+
+footer#egwk-footer {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 2rem;
+  background-color: $egwk-primary;
+  display: flex;
+  justify-content: space-evenly;
+  color: $egwk-white;
+  font-size: $small-font;
+}
+
+#egwk-footer > div {
+  width: 30%;
+}
+
+#egwk-footer a {
+  color: $egwk-primary-lighter;
+}
+
+#egwk-footer a:hover {
+  color: $egwk-white;
+  text-decoration: underline;
+}
+
+html, body, textarea, .mat-tab-group {
   font-family: 'Raleway', sans-serif;
   font-weight: 100;
   font-size: 14pt;
@@ -98,16 +137,30 @@ nav.top-nav {
 }
 
 
-.egwk-logo {
-  background: url('./assets/images/egw_signo-ocean-side.svg') no-repeat;
+.egwk-logo, .egwk-logo-white {
   background-size: 60px;
   background-position-y: center;
   background-position-x: 8px;
+  background-repeat: no-repeat;
   width: 100px;
+}
+
+.egwk-logo {
+  background-image: url('./assets/images/egw_signo-ocean-side.svg');
+}
+
+.egwk-logo-white {
+  background-image: url('./assets/images/egw_signo_gray.svg');
 }
 
 #egwk-body {
   padding: 0;
+}
+
+#egwk-header {
+  padding: 0;
+  margin: 0;
+  width: 100%;
 }
 
 .links {
@@ -194,7 +247,7 @@ ins {
   display: none;
 }
 
-.sticky{
+.sticky {
   position: fixed;
   top: 0;
   overflow: hidden;
@@ -220,7 +273,7 @@ ins {
 }
 
 .top-padding {
-  padding-top: $topmargin;
+  // padding-top: $topmargin;
 }
 
 @media (max-width: $with-mobile) {
@@ -278,6 +331,6 @@ h6 {
   font-size: 0.9rem;
 }
 
-.sda-symbol{
+.sda-symbol {
 
 }

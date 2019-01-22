@@ -8,13 +8,13 @@
 @media (min-width: $with-mobile) {
   .egwk-hymn-list-wrapper {
     width: 30rem;
-    margin: $topmargin auto;
+    margin: 0 auto;
   }
 }
 
 @media (max-width: $with-mobile) {
   .egwk-hymn-list-wrapper {
-    margin: $topmargin $sidemargin;
+    margin: 0 $sidemargin;
   }
 }
 

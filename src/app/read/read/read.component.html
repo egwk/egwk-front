@@ -18,6 +18,10 @@ todo:
         alt: metadata.book[0].tr_title + ' (' + metadata.book[0].translator + '; ' + metadata.book[0].publisher_name + ', ' + metadata.book[0].year + ')',
         uri: metadata.book[0].toc_uri
       },
+      {
+        title: metadata.section[0] ? metadata.section[0].tr_content : '',
+        condition: metadata.section[0]
+       },
       {title: metadata.chapter[0].tr_content}
     ]"></breadcrumbs>
     <h2 class="egwk-read-chapter-title">
@@ -35,7 +39,12 @@ todo:
     </div>
 
 
-    <chapter-step [nav]="metadata.nav"></chapter-step>
+    <chapter-step
+      [prev-uri]="metadata.nav.prev[0].chapter_uri"
+      [prev-label]="metadata.nav.prev[0].tr_content"
+      [next-uri]="metadata.nav.next[0].chapter_uri"
+      [next-label]="metadata.nav.next[0].tr_content"
+    ></chapter-step>
 
     <paragraph
       *ngFor="let paragraph of chapter.data"
@@ -44,7 +53,12 @@ todo:
       [showOriginal]="showOriginal"
     ></paragraph>
 
-    <chapter-step [nav]="metadata.nav"></chapter-step>
+    <chapter-step
+      [prev-uri]="metadata.nav.prev[0].chapter_uri"
+      [prev-label]="metadata.nav.prev[0].tr_content"
+      [next-uri]="metadata.nav.next[0].chapter_uri"
+      [next-label]="metadata.nav.next[0].tr_content"
+    ></chapter-step>
 
     <!--circular-menu></circular-menu-->
 

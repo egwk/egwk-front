@@ -21,7 +21,21 @@
 .egwk-search-tools-button {
   user-select: none;
   cursor: pointer;
+
   & .mat-icon {
     vertical-align: middle;
+  }
+}
+
+.egwk-search-paragraph {
+  display: flex;
+  justify-content: space-between;
+
+  p.has-translation {
+    width: 49%;
+  }
+
+  p.has-translation.is-original {
+    margin-top: 68px;
   }
 }

@@ -1,6 +1,6 @@
 export class PaginatedModel<T> {
   current_page: string;
-  data: Array<T>;
+  protected _data: Array<T>;
   first_page_url: string;
   from: number;
   last_page: number;
@@ -10,4 +10,17 @@ export class PaginatedModel<T> {
   per_page: number;
   prev_page_url: string;
   to: number;
+
+  set data(data) {
+    if (typeof data === 'object') {
+      this._data = Object.values(data);
+    } else {
+      this._data = data;
+    }
+  }
+
+  get data() {
+      return this._data;
+  }
+
 }

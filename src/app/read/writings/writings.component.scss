@@ -40,7 +40,7 @@
 
 @media (max-width: $with-mobile) {
   .egwk-read {
-    margin: $topmargin 0 0 0;
+    margin: 0 0 0 0;
   }
   .mat-column-translator {
     display: none;
@@ -66,7 +66,7 @@
     display: flex;
   }
   .egwk-read {
-    margin: $topmargin 1rem 0 1rem;
+    margin: 0 1rem 0 1rem;
   }
   .mat-column-translator {
     flex-grow: 3;
@@ -82,7 +82,7 @@
   }
 
   .egwk-read {
-    margin: $topmargin 3rem 0 3rem;
+    margin: 0 3rem 0 3rem;
   }
 
 }

@@ -11,9 +11,10 @@ import {WritingsComponent} from "./read/writings/writings.component";
 import {AuthComponent} from "./auth/auth.component";
 import {TocComponent} from "./read/toc/toc.component";
 import {ReadComponent} from "./read/read/read.component";
-import {SynchGuard} from "./synch/synch.guard";
 import {AuthGuard} from "./auth/auth.guard";
 import {EditComponent} from "./hymnal/edit/edit.component";
+import {BibleComponent} from "./bible/bible.component";
+import {SsqComponent} from "./ssq/ssq.component";
 
 export const appRoutes: Routes = [
   //
@@ -43,7 +44,18 @@ export const appRoutes: Routes = [
     path: 'synch',
     component: SynchSelectComponent,
     data: {title: 'Synch Writings'},
-    canActivate: [AuthGuard],
+  },
+  {
+    path: 'synch/:translation',
+    component: SynchComponent,
+    data: {title: 'Synch Writings'},
+  },
+  {
+    path: 'synch/:translation/:page',
+    component: SynchComponent,
+    data: {title: 'Synch Writings'},
+    // canActivate: [AuthGuard],
+    /*
     children: [
       {
         path: ':translation',
@@ -56,6 +68,7 @@ export const appRoutes: Routes = [
         data: {title: 'Synch Writings'}
       },
     ]
+    */
   },
   //
   // Hymnals
@@ -104,12 +117,12 @@ export const appRoutes: Routes = [
     path: 'search',
     component: SearchComponent,
     data: {title: 'Search in the Writings'},
-    children: [
-      {
-        path: ':query',
-        component: SearchComponent,
-      },
-    ]
+  },
+  //
+  {
+    path: 'search/:page',
+    component: SearchComponent,
+    data: {title: 'Search in the Writings'},
   },
   //
   // Read testimonies
@@ -143,16 +156,16 @@ export const appRoutes: Routes = [
   //
   {
     path: 'bible',
-    component: SearchComponent,
-    data: {title: 'Bibles are coming'}
+    component: BibleComponent,
+    data: {title: 'Bible'}
   },
   //
   // Sabbath School Quarterly
   //
   {
     path: 'ssq',
-    component: SearchComponent,
-    data: {title: 'SSQ is coming'}
+    component: SsqComponent,
+    data: {title: 'Sabbath School Quarterly'}
   },
   //
   // Home

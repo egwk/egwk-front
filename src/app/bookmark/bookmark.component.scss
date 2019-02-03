@@ -1,0 +1,9 @@
+@import '../../colors.scss';
+@import '../../variables.scss';
+
+.egwk-bookmark-button {
+  cursor: pointer;
+  user-select: none;
+  color: $egwk-primary-light;
+  vertical-align: -5px;
+}

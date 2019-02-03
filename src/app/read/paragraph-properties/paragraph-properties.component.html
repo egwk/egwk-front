@@ -6,7 +6,7 @@
     <mat-card-subtitle>{{data.book.publisher_name}}, {{data.paragraph.year}}.</mat-card-subtitle>
   </mat-card-header>
   <mat-card-content>
-    <mat-icon>bookmark</mat-icon>
+    <bookmark [para-id]="data.paragraph.para_id"></bookmark>
   </mat-card-content>
 </mat-card>
 
@@ -20,7 +20,12 @@
       <mat-panel-description></mat-panel-description>
     </mat-expansion-panel-header>
 
-    <comments [for]="data.paragraph.para_id" [type]="'notes'"></comments>
+    <comments
+      [for]="data.paragraph.para_id"
+      [type]="'notes'"
+      [(comments)]="myNotes"
+      [hide]="{user: true}"
+      (commentsChange)="notesChange()"></comments>
 
   </mat-expansion-panel>
 

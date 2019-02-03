@@ -45,7 +45,10 @@
       <mat-tab-group>
         <mat-tab
           *ngFor="let tr_paragraph of paragraph.translations"
-          [label]="tr_paragraph.publisher + ', ' + tr_paragraph.year + '.'">{{ tr_paragraph.content }}</mat-tab>
+          [label]="tr_paragraph.publisher + ', ' + tr_paragraph.year + '.'"
+        >
+          <span [innerHTML]="tr_paragraph.content | highlightText:currentQuery"></span>
+        </mat-tab>
       </mat-tab-group>
     </p>
   </div>

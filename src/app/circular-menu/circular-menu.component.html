@@ -1,3 +1,19 @@
 <div class="circular-menu">
-  <mat-icon>clear</mat-icon>
+
+  <div class="circular-menu-content">
+    <ng-content *ngIf="show"></ng-content>
+  </div>
+
+  <div
+    [ngClass]="{
+     'circular-menu-center': true,
+    'circular-menu-hidden' : !show,
+    'circular-menu-shown' : show
+  }"
+    (click)="show = !show">
+    <mat-icon>clear</mat-icon>
+  </div>
+
 </div>
+
+<div id="overlay" (click)="show = !show" [class]="!show ? 'hidden' : ''"></div>

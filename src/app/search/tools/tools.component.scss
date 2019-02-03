@@ -1,6 +1,12 @@
+@import '../../../colors.scss';
+@import '../../../variables.scss';
+
 .egwk-search-tools-button {
   user-select: none;
   cursor: pointer;
+  color: $egwk-primary;
+  font-family: monospace;
+  font-size: $small-font;
 & .mat-icon {
     vertical-align: middle;
   }

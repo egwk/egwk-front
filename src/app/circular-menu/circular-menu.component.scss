@@ -1,7 +1,32 @@
 @import '../../colors.scss';
 @import '../../variables.scss';
 
-.circular-menu{
+.circular-menu {
+  user-select: none;
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  width: 100%;
+  border-radius: 28px;
+  background-color: $egwk-primary;
+  cursor: pointer;
+  z-index: 999;
+}
+
+.circular-menu-content {
+  word-break: break-all;
+  display: block;
+  position: absolute;
+  bottom: 64px;
+  right: 0;
+  text-align: right;
+  /*
+  background-color: rgba($egwk-white, 0.9);
+  padding: 10px;
+  */
+}
+
+.circular-menu-center {
   position: fixed;
   bottom: 2rem;
   right: 2rem;
@@ -9,12 +34,25 @@
   height: 56px;
   border-radius: 28px;
   background-color: $egwk-primary;
-  color: rgba($egwk-white, 0.8);
-  box-shadow: 3px 3px 10px rgba($egwk-black, 0.5);
   cursor: pointer;
 }
 
-.circular-menu .mat-icon {
-  margin: 10px 0 0 10px;
+
+.circular-menu-center .mat-icon {
+  color: rgba($egwk-white, 0.8);
+  margin: 9px 9px;
   font-size: 2rem;
+}
+
+.circular-menu-hidden {
+  transform: rotate(45deg);
+  transform-origin: 50% 50%;
+  transition: 0.1s ease-in;
+  box-shadow: 3px 0px 10px rgba($egwk-black, 0.5);
+}
+
+.circular-menu-shown {
+  transform: none;
+  transition: 0.1s ease-in;
+  box-shadow: 3px 3px 10px rgba($egwk-black, 0.5);
 }

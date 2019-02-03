@@ -1,0 +1,13 @@
+@import '../../../colors.scss';
+@import '../../../variables.scss';
+
+.circular-menu-item {
+  color: $egwk-white;
+  margin: 1rem;
+/*
+  background: $egwk-primary-light;
+  padding: 4px 16px;
+  border-radius: 2px;
+  box-shadow: 2px 2px 100px rgba($egwk-primary-light, 0.5);
+*/
+}

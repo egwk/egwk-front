@@ -1,5 +1,28 @@
-<p>
-  <span [innerHTML]="data.user"></span>
-  <span [innerHTML]="data.date"></span>
-  <span [innerHTML]="data.comment"></span>
-</p>
+<div class="comment-wrapper">
+
+  <div *ngIf="!hide.toolbar" class="comment-toolbar"></div>
+  <div *ngIf="!hide.user" class="comment-user" [innerHTML]="comment.user"></div>
+  <div *ngIf="!hide.date" class="comment-date" [innerHTML]="comment.date | date: 'yyyy-MM-dd HH:mm:ss' "></div>
+
+  <div style="width: 100%">
+
+    <toggle-button
+      style="float:left"
+      *ngIf="!hide.toolbar"
+      [(setting)]="editMode"
+      [icons]="{
+          on: 'save',
+          off: 'edit'
+      }"></toggle-button>
+
+    <div *ngIf="!hide.comment && !editMode" class="comment-comment" [innerHTML]="comment.comment"></div>
+
+    <comment-edit
+      *ngIf="editMode"
+      [reset]="false"
+      [(comment)]="comment.comment"
+      (commentChange)="editMode=false"
+    ></comment-edit>
+
+  </div>
+</div>

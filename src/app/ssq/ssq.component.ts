@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-ssq',
+  selector: 'ssq',
   templateUrl: './ssq.component.html',
   styleUrls: ['./ssq.component.scss']
 })

@@ -1,3 +1,10 @@
-<div>
-  <comment *ngFor="let comment of comments" [data]="comment"></comment>
+<div class="comments-wrapper">
+
+  <comment-edit
+    [(comment)]="newComment"
+    (commentChange)="addComment($event)"
+  ></comment-edit>
+
+  <comment *ngFor="let comment of comments" [comment]="comment" [hide]="hide"></comment>
+
 </div>

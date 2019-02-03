@@ -10,6 +10,7 @@ export class PaginatedModel<T> {
   per_page: number;
   prev_page_url: string;
   to: number;
+  total: number;
 
   set data(data) {
     if (typeof data === 'object') {

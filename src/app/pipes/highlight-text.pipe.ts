@@ -14,30 +14,35 @@ export class HighlightTextPipe implements PipeTransform {
   constructor() {
   }
 
+  protected replaceTokens(text) {
+    return text.replace('*', '.*');
+  }
+
   transform(data: string,
             highlightText: string,
             option: string = "Multi-Match",
             caseSensitive: boolean = false,
             highlightStyleName: string = "search-highlight"): SafeHtml {
     if (highlightText && data && option) {
+      let processedHighlightText = this.replaceTokens(highlightText);
       let regex: any = "";
       let caseFlag: string = !caseSensitive ? "i" : "";
       switch (option) {
         case "Single-Match": {
-          regex = new RegExp(highlightText, caseFlag);
+          regex = new RegExp(processedHighlightText, caseFlag);
           break;
         }
         case "Single-And-StartsWith-Match": {
-          regex = new RegExp("^" + highlightText, caseFlag);
+          regex = new RegExp("^" + processedHighlightText, caseFlag);
           break;
         }
         case "Multi-Match": {
-          regex = new RegExp(highlightText, "g" + caseFlag);
+          regex = new RegExp(processedHighlightText, "g" + caseFlag);
           break;
         }
         default: {
           // default will be a global case-insensitive match
-          regex = new RegExp(highlightText, "gi");
+          regex = new RegExp(processedHighlightText, "gi");
         }
       }
       return data.replace(regex, (match) => `<span class="${highlightStyleName}">${match}</span>`);

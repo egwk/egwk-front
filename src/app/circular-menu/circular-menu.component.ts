@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CircularMenuComponent implements OnInit {
 
+  show: boolean = false;
+
   constructor() { }
 
   ngOnInit() {

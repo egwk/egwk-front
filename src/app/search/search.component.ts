@@ -4,6 +4,7 @@ import {SearchResultPaginatied} from "../models/search-result.model";
 import {ActivatedRoute, ParamMap, Router} from "@angular/router";
 import {map, switchMap} from "rxjs/operators";
 import {AppSettings} from "../app.settings";
+import {register} from "ts-node";
 
 export class SearchSettings {
   showSimilarsDefault: boolean = false;
@@ -21,14 +22,16 @@ export class SearchSettings {
 })
 export class SearchComponent implements OnInit {
 
-  @ViewChild('query', {read: ElementRef}) query: ElementRef;
+  @ViewChild('queryElement', {read: ElementRef}) queryElement: ElementRef;
 
   result: SearchResultPaginatied;
-  currentQuery: string;
-  currentReference = null;
-  perPage = 25;
+  query: string;
+  reference = null;
+  target = '*';
+  page = 1;
+  limit = 25;
   similars = [];
-  settings = new SearchSettings();
+  settings: SearchSettings = new SearchSettings();
 
   constructor(
     private searchService: EgwkSearchService,
@@ -37,16 +40,8 @@ export class SearchComponent implements OnInit {
   ) {
   }
 
-  searchByRoute() {
-    this.activatedRoute.queryParams
-      .subscribe(params => {
-        let query = params['q'];
-        let page = params['p'];
-        if (query) {
-          this.query.nativeElement.value = query;
-          this.search('writings', query, null, page);
-        }
-      });
+  ngOnInit() {
+    this.searchByRoute();
   }
 
   loadByroute() {
@@ -68,22 +63,20 @@ export class SearchComponent implements OnInit {
     )
   }
 
-  ngOnInit() {
-    this.searchByRoute();
-  }
-
   pageEvent($event) {
-    this.perPage = $event.pageSize;
-    this.search('writings', this.currentQuery, this.currentReference, $event.pageIndex + 1, this.perPage);
+    /*
+    length: 245
+    pageIndex: 0
+    pageSize: 25
+    previousPageIndex:
+     */
+    this.navigateSearch(null, null, null, $event.pageIndex + 1, $event.pageSize);
   }
 
   covers($event) {
     if (this.settings.equalCoverage) {
       this.settings.covered = this.settings.covers;
     }
-  }
-
-  covered(event) {
   }
 
   equalCoverage(event) {
@@ -97,23 +90,63 @@ export class SearchComponent implements OnInit {
   }
 
   useAsReference(paraId: string, page = 1): void {
-    this.currentReference = paraId;
-    this.search('writings', this.currentQuery, this.currentReference, page, this.perPage);
+    this.navigateSearch(null, null, paraId, page, null);
   }
 
-  search(target: string, query: string, reference: string = null, page = 1, perPage = 25) {
+  navigateSearch(query: string, target: string, reference: string = null, page = null, limit = null) {
+    this.target = target ? target : this.target;
+    this.page = page ? page : this.page;
+    this.limit = limit ? limit : this.limit;
+    this.reference = reference ? reference : this.reference;
+    this.query = query ? query : this.query;
+    this.router.navigate(['/search'], {
+      queryParams: {
+        q: this.query,
+        t: this.target,
+        r: this.reference,
+        p: this.page,
+        l: this.limit,
+      }
+    });
+  }
+
+  searchByRoute() {
+    this.activatedRoute.queryParams
+      .subscribe(params => {
+        let query = params['q'];
+        let target = params['t'] ? params['t'] : '*';
+        let page = params['p'] ? params['p'] : 1;
+        let reference = params['r'] ? params['r'] : null;
+        let limit = params['l'] ? params['l'] : this.limit;
+        if (query) {
+          this.queryElement.nativeElement.value = query;
+          this.search(query, target, reference, page, limit);
+        }
+      });
+  }
+
+  search(query: string, target: string, reference: string = null, page = 1, limit = 25) {
     this.similars = [];
     this.result = null;
-    this.currentQuery = query;
+    this.query = query;
     let covered = this.settings.equalCoverage ? null : this.settings.covered;
-    this.searchService.search(query, this.settings.covers, covered, reference, page, perPage).subscribe(
+    this.searchService.search(query, this.settings.covers, covered, reference, page, limit).subscribe(
       result => this.result = <SearchResultPaginatied>result
     );
   }
 
   onKeydown($event) {
     if ($event.key === "Enter") {
-      this.search('writings', this.query.nativeElement.value, this.currentReference, 1, this.perPage);
+      this.navigateSearch(this.queryElement.nativeElement.value, null, null, 1, null);
     }
   }
+
+  toggleDiff(): void {
+    this.settings.showDiff = !this.settings.showDiff;
+  }
+
+  toggleDeletions(): void {
+    this.settings.showDeletions = !this.settings.showDeletions;
+  }
+
 }

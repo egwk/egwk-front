@@ -1,0 +1,8 @@
+<textarea
+  [(ngModel)]="comment"
+  (keyup)="keyup($event)"
+  class="comment-editor"
+  matInput
+  cdkTextareaAutosize
+  cdkAutosizeMinRows="2"
+  cdkAutosizeMaxRows="5"></textarea>

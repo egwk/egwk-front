@@ -20,16 +20,8 @@ export class ToolsComponent implements OnInit {
   ngOnInit() {
   }
 
-  toggleFilter(): void {
-    this.settings.showDiff = !this.settings.showDiff;
-  }
-
   toggleSimilars(paraId: string): void {
     this.similars[paraId] = this.similars[paraId] !== undefined ? undefined : true;
-  }
-
-  toggleDeletions(): void {
-    this.settings.showDeletions = !this.settings.showDeletions;
   }
 
 }

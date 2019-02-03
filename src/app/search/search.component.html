@@ -4,7 +4,7 @@
 
     <div class="egwk-search-form">
 
-      <input type="text" #query value="jesus loves to have us"/>
+      <input type="text" #queryElement (keydown)="onKeydown($event)"/>
       <div>
         <p>
           Covers: <span class="slider-percentage">{{ settings.covers }}%</span>
@@ -19,7 +19,6 @@
             min="0" max="100" step="5" value="50"
             [thumbLabel]="true"
             [(ngModel)]="settings.covered"
-            (ngModelChange)="covered($event)"
             [disabled]="settings.equalCoverage"
           ></mat-slider>
           <mat-slide-toggle
@@ -29,12 +28,12 @@
       </div>
       <span>Search in:</span>
       <ul class="links">
-        <li><a (click)="search('writings', query.value)">Writings</a></li>
-        <!--li><a (click)="search('*', query.value)">Everywhere</a></li>
-        <li><a (click)="search('bible', query.value)">Bible</a></li>
-        <li><a (click)="search('hymnal', query.value)">Hymnal</a></li>
-        <li><a (click)="search('ssq', query.value)">SSQ</a></li>
-        <li><a (click)="search('other', query.value)">Other</a></li-->
+        <li><a (click)="navigateSearch(queryElement.value, '*')">Everywhere</a></li>
+        <li><a (click)="navigateSearch(queryElement.value, 'writings')">Writings</a></li>
+        <li><a (click)="navigateSearch(queryElement.value, 'bible')">Bible</a></li>
+        <li><a (click)="navigateSearch(queryElement.value, 'hymnal')">Hymnal</a></li>
+        <li><a (click)="navigateSearch(queryElement.value, 'ssq')">SSQ</a></li>
+        <!--li><a (click)="search(queryElement.value, 'other')">Other</a></li-->
       </ul>
 
     </div>
@@ -56,9 +55,10 @@
   <ol class="egwk-search-results" *ngIf="result">
     <li class="egwk-search-result" *ngFor="let item of result?.data">
 
+      <bookmark [para-id]="item.self.para_id"></bookmark>
+
       <search-tools
         [result]="item"
-        [settings]="settings"
         [similars]="similars"
         [showSimilars]="showSimilars"></search-tools>
 
@@ -66,12 +66,14 @@
         [paragraph]="item.self"
         [settings]="settings"
         (useAsReference)="useAsReference($event)"
-        [currentQuery]="currentQuery"></search-paragraph>
+        [currentQuery]="query"></search-paragraph>
 
       <ng-container *ngIf="(showSimilars(item.self.para_id) || settings.showSimilarsDefault) && item.similars">
 
         <ol class="egwk-search-results">
           <li class="egwk-search-result" *ngFor="let similar of item.similars">
+
+            <bookmark [para-id]="similar.paragraph.para_id"></bookmark>
 
             <search-paragraph
               [paragraph]="similar.paragraph"
@@ -79,7 +81,7 @@
               [parent]="item.self"
               [settings]="settings"
               (useAsReference)="useAsReference($event)"
-              [currentQuery]="currentQuery"></search-paragraph>
+              [currentQuery]="query"></search-paragraph>
 
           </li>
         </ol>
@@ -90,3 +92,31 @@
   </ol>
 
 </div>
+
+<circular-menu>
+  <circular-menu-toggle-item
+    [(setting)]="settings.showDiff"
+    [labels]="{
+      on: 'Hide differences',
+      off: 'Show differences'
+    }"
+    [icons]="{
+      on: 'indeterminate_check_box',
+      off: 'add_box'
+    }"
+  >
+  </circular-menu-toggle-item>
+  <circular-menu-toggle-item
+    *ngIf="settings.showDiff"
+    [(setting)]="settings.showDeletions"
+    [labels]="{
+      on: 'Hide deletions',
+      off: 'Show deletions'
+    }"
+    [icons]="{
+      on: 'indeterminate_check_box',
+      off: 'add_box'
+    }"
+  >
+  </circular-menu-toggle-item>
+</circular-menu>

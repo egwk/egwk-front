@@ -36,7 +36,7 @@
           'egwk-read-toc-section': row.element_type === 'h2',
           'router-link': row.element_type !== 'h2'
         }"
-          [routerLink]="row.element_type !== 'h2' ? row.chapter_uri : null"
+          [routerLink]="row.element_type !== 'h2' ? row?.chapter_uri : null"
       ></mat-row>
 
     </mat-table>

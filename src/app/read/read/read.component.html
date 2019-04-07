@@ -40,10 +40,10 @@ todo:
 
 
     <chapter-step
-      [prev-uri]="metadata.nav.prev[0].chapter_uri"
-      [prev-label]="metadata.nav.prev[0].tr_content"
-      [next-uri]="metadata.nav.next[0].chapter_uri"
-      [next-label]="metadata.nav.next[0].tr_content"
+      [prev-uri]="metadata.nav.prev[0]?.chapter_uri"
+      [prev-label]="metadata.nav.prev[0]?.tr_content"
+      [next-uri]="metadata.nav.next[0]?.chapter_uri"
+      [next-label]="metadata.nav.next[0]?.tr_content"
     ></chapter-step>
 
     <paragraph
@@ -54,10 +54,10 @@ todo:
     ></paragraph>
 
     <chapter-step
-      [prev-uri]="metadata.nav.prev[0].chapter_uri"
-      [prev-label]="metadata.nav.prev[0].tr_content"
-      [next-uri]="metadata.nav.next[0].chapter_uri"
-      [next-label]="metadata.nav.next[0].tr_content"
+      [prev-uri]="metadata.nav.prev[0]?.chapter_uri"
+      [prev-label]="metadata.nav.prev[0]?.tr_content"
+      [next-uri]="metadata.nav.next[0]?.chapter_uri"
+      [next-label]="metadata.nav.next[0]?.tr_content"
     ></chapter-step>
 
     <!--circular-menu></circular-menu-->

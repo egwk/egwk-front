@@ -348,3 +348,22 @@ h6 {
   z-index: 2; /* Specify a stack order in case you're using a different order for other elements */
   cursor: pointer; /* Add a pointer on hover */
 }
+
+
+.egwk-form-item {
+  width: 100%;
+  display: block;
+}
+
+.egwk-form-item-50 {
+  width: $almost-half;
+  display: block;
+}
+
+.egwk-textarea-150 {
+  min-height: 150px;
+}
+
+.egwk-textarea-300 {
+  min-height: 300px;
+}

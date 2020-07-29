@@ -1,0 +1,94 @@
+<div class="top-padding egwk-hym-edit">
+
+  <breadcrumbs [items]="[
+      {title: 'Home', uri: '/', icon: 'home'},
+      {title: 'Hymnals', uri: '/hymnals'}
+    ]"></breadcrumbs>
+
+
+  <form [formGroup]="editHymnForm" (ngSubmit)="onSubmit()">
+
+    <button type="submit" mat-flat-button color="primary">Save</button>
+
+    <div class="egwk-hymn-edit-infix">
+
+      <div class="egwk-hymn-edit-column egwk-hymn-edit-source-column">
+
+        <div class="egwk-hymn-edit-row egwk-hymn-edit-source" formGroupName="score">
+          <mat-form-field class="egwk-form-item-50">
+              <textarea matInput placeholder="Soprano" name="soprano" formControlName="soprano"
+                        class="egwk-textarea-150"></textarea>
+          </mat-form-field>
+          <mat-form-field class="egwk-form-item-50">
+              <textarea matInput placeholder="Alto" name="alto" formControlName="alto"
+                        class="egwk-textarea-150"></textarea>
+          </mat-form-field>
+        </div>
+
+        <div class="egwk-hymn-edit-row egwk-hymn-edit-source" formGroupName="score">
+          <mat-form-field class="egwk-form-item-50 ">
+              <textarea matInput placeholder="Tenor" name="tenor" formControlName="tenor"
+                        class="egwk-textarea-150"></textarea>
+          </mat-form-field>
+          <mat-form-field class="egwk-form-item-50">
+              <textarea matInput placeholder="Bass" name="bass" formControlName="bass"
+                        class="egwk-textarea-150"></textarea>
+          </mat-form-field>
+        </div>
+
+        <div class="egwk-hymn-edit-row egwk-hymn-edit-metadata" formGroupName="metadata">
+          <mat-form-field class="egwk-form-item-50">
+            <input matInput placeholder="Title" name="title" formControlName="title"/>
+          </mat-form-field>
+          <mat-form-field class="egwk-form-item-50">
+            <input matInput placeholder="Tune" name="tune" formControlName="tune"/>
+          </mat-form-field>
+          <mat-form-field class="egwk-form-item-50">
+            <input matInput placeholder="Composer" name="composer" formControlName="composer"/>
+          </mat-form-field>
+          <mat-form-field class="egwk-form-item-50">
+            <input matInput placeholder="Poet" name="poet" formControlName="poet"/>
+          </mat-form-field>
+
+          <br/>
+
+          <mat-form-field class="egwk-form-item-50">
+            <input matInput placeholder="Translation" name="translation" formControlName="translation"/>
+          </mat-form-field>
+          <mat-form-field class="egwk-form-item-50">
+            <input matInput placeholder="Arranger" name="arranger" formControlName="arranger"/>
+          </mat-form-field>
+          <mat-form-field class="egwk-form-item-50">
+            <input matInput placeholder="Topic" name="topic" formControlName="topic"/>
+          </mat-form-field>
+          <mat-form-field class="egwk-form-item-50">
+            <input matInput placeholder="Info" name="info" formControlName="info"/>
+          </mat-form-field>
+
+          <br/>
+
+          <mat-form-field class="egwk-form-item-50">
+            <input matInput placeholder="Copyright" name="copyright" formControlName="copyright"/>
+          </mat-form-field>
+
+        </div>
+
+      </div>
+
+      <div class="egwk-hymn-edit-column egwk-hymn-edit-lyrics-column">
+
+        <mat-form-field class="egwk-form-item">
+          <textarea matInput placeholder="Lyrics" name="lyrics" formControlName="lyrics"
+                    class="egwk-textarea-300"></textarea>
+        </mat-form-field>
+
+      </div>
+
+      <div class="egwk-hymn-edit-column egwk-hymn-edit-score-column">
+        <img class="egwk-hymn-score-image" [src]="scoreImage" #scoreImageElement/>
+      </div>
+
+    </div>
+  </form>
+
+</div>

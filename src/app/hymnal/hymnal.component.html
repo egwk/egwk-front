@@ -5,6 +5,18 @@
       {
        title: hymnalMetadata.title,
        alt: hymnalMetadata.title + ' (' + hymnalMetadata.publisher + ', ' + hymnalMetadata.year + ')'
+      },
+      {
+       condition: canEdit(),
+       icon: 'edit',
+       uri: '/edit/hymnal/' + hymnalMetadata.slug,
+       alt: 'Edit Hymnal'
+      },
+      {
+       condition: canEdit(),
+       icon: 'add',
+       uri: getHymnEditUrl(hymnalMetadata.slug),
+       alt: 'Add Hymn'
       }
     ]"></breadcrumbs>
   <div class="egwk-hymn-list-wrapper">
@@ -16,7 +28,10 @@
       </small>
     </h1>
     <div class="egwk-hymn-item" [routerLink]="getHymnUrl(hymn)" *ngFor="let hymn of hymnal">
-      <span class="egwk-hymn-item-title">{{ hymn.hymn_no }}. {{ hymn.title }}</span>
+      <div class="egwk-hymn-item">
+<!--        <mat-icon *ngIf="canEdit()" [routerLink]="getHymnEditUrl(hymnalMetadata.slug, hymn.hymn_no)">edit</mat-icon>-->
+        <span class="egwk-hymn-item-title">{{ hymn.hymn_no }}. {{ hymn.title }}</span>
+      </div>
     </div>
   </div>
 </div>

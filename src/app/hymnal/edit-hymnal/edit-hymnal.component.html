@@ -1,0 +1,56 @@
+<div class="top-padding egwk-hymnal-edit">
+
+  <breadcrumbs [items]="[
+      {title: 'Home', uri: '/', icon: 'home'},
+      {title: 'Hymnals', uri: '/hymnals'},
+      {
+       title: hymnalMetadata.title,
+       alt: hymnalMetadata.title + ' (' + hymnalMetadata.publisher + ', ' + hymnalMetadata.year + ')'
+      }
+    ]"></breadcrumbs>
+
+  <div class="egwk-hymnal-edit-infix">
+    <form class="" *ngIf="loading !== undefined && !loading">
+      <mat-form-field class="egwk-form-item">
+        <input matInput placeholder="Title" name="title" [(ngModel)]="hymnalMetadata.title">
+      </mat-form-field>
+
+      <mat-form-field class="egwk-form-item">
+        <input matInput placeholder="Publisher" name="publisher" [(ngModel)]="hymnalMetadata.publisher">
+      </mat-form-field>
+
+      <mat-form-field class="egwk-form-item">
+        <input matInput placeholder="Year" name="year" [(ngModel)]="hymnalMetadata.year">
+      </mat-form-field>
+
+      <mat-form-field class="egwk-form-item">
+        <input type="text"
+               placeholder="Language code"
+               aria-label="Language code"
+               matInput
+               [(ngModel)]="hymnalMetadata.lang"
+               [formControl]="langControl"
+               [matAutocomplete]="langCodeAuto">
+        <mat-autocomplete #langCodeAuto="matAutocomplete">
+          <mat-option *ngFor="let langCode of filteredLangCodes | async" [value]="langCode">
+            {{ langCode }}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+
+      <mat-form-field class="egwk-form-item">
+        <input matInput placeholder="Slug" disabled name="slug" #slug [value]="hymnalMetadata.title | slugify">
+      </mat-form-field>
+
+      <mat-form-field class="egwk-form-item">
+        <textarea matInput placeholder="Description" name="description"
+                  [(ngModel)]="hymnalMetadata.description"></textarea>
+      </mat-form-field>
+
+      <button mat-raised-button (click)="save()">Save</button>
+    </form>
+
+
+  </div>
+
+</div>

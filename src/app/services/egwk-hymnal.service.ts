@@ -7,6 +7,7 @@ import {map} from "rxjs/operators";
 import {Hymn} from "../models/hymn.model";
 import {HymnVerse} from "../models/hymn-verse.model";
 import * as _ from "lodash";
+import {AuthGuard} from "../auth/auth.guard";
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +16,7 @@ export class EgwkHymnalService {
 
   constructor(
     protected http: HttpClient,
+    protected authGuard: AuthGuard,
   ) {
   }
 
@@ -28,6 +30,14 @@ export class EgwkHymnalService {
 
   getHymnalMetadata(slug: string): Observable<any> {
     return this.http.get(AppSettings.HYMNAL_API_URL + slug + '/metadata');
+  }
+
+  saveHymnalMetadata(hymnalMetadata: Hymnal): Observable<any> {
+    if (hymnalMetadata.id) {
+      return this.http.put(AppSettings.HYMNAL_API_URL + 'metadata/' + hymnalMetadata.slug, hymnalMetadata);
+    } else {
+      return this.http.post(AppSettings.HYMNAL_API_URL + 'metadata', hymnalMetadata);
+    }
   }
 
   getHymnMetadata(slug: string, hymnNo = null): Observable<Array<Hymn>> {
@@ -55,5 +65,14 @@ export class EgwkHymnalService {
     no = _.padStart(no, 3, '0');
     return this.http.get(`/assets/images/hymnals/${slug}/${no}.${type}`, {responseType: 'blob'});
   }
+
+  canEditHymn() {
+    return this.authGuard.hasPermission('edit/hymn');
+  }
+
+  canEditHymnal() {
+    return this.authGuard.hasPermission('edit/hymnal');
+  }
+
 
 }

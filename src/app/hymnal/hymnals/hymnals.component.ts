@@ -4,6 +4,7 @@ import {ActivatedRoute, ParamMap} from "@angular/router";
 import {switchMap} from "rxjs/operators";
 import {Hymnal} from "../../models/hymnal.model";
 import {AppSettings} from "../../app.settings";
+import {AuthGuard} from "../../auth/auth.guard";
 
 @Component({
   selector: 'app-hymnals',
@@ -20,6 +21,10 @@ export class HymnalsComponent implements OnInit {
 
   language: string;
   hymnals: Array<Hymnal>;
+
+  canEdit() {
+    return this.hymnalService.canEditHymnal();
+  }
 
   loadByroute() {
     return this.route.paramMap.pipe(

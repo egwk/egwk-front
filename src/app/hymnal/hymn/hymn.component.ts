@@ -8,7 +8,7 @@ import {Hymnal} from "../../models/hymnal.model";
 import {AuthGuard} from "../../auth/auth.guard";
 
 @Component({
-  selector: 'hymnVerses',
+  selector: 'app-hymn-verses',
   templateUrl: './hymn.component.html',
   styleUrls: ['./hymn.component.scss']
 })
@@ -36,6 +36,7 @@ export class HymnComponent implements OnInit {
   ) {
   }
 
+  // todo: buggy!
   @HostListener('window:scroll', ['$event'])
   handleScroll() {
     const windowScroll = window.pageYOffset;
@@ -62,7 +63,7 @@ export class HymnComponent implements OnInit {
   }
 
   canEdit() {
-    return this.authGuard.hasPermission('edit/hymn');
+    return this.hymnalService.canEditHymn();
   }
 
   createImageFromBlob(image: Blob) {

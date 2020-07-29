@@ -1,0 +1,44 @@
+@import '../../../colors';
+@import '../../../variables';
+
+.egwk-hymn-edit-infix {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  align-items: stretch;
+  align-content: stretch;
+
+  width: $almost-full;
+  margin: 0 auto;
+
+  min-height: 500px;
+}
+
+.egwk-hymn-edit-column {
+  min-height: 500px;
+}
+
+.egwk-hymn-edit-row {
+  width: 100%;
+}
+
+.egwk-hymn-edit-source-column {
+  flex-grow: 2;
+}
+
+.egwk-hymn-edit-source {
+}
+
+.egwk-hymn-edit-metadata {
+}
+
+.egwk-hymn-edit-lyrics-column {
+  display: flex;
+  align-items: stretch;
+  align-content: stretch;
+  flex-grow: 1;
+}
+
+.egwk-hymn-edit-score-column {
+  flex-grow: 3;
+}

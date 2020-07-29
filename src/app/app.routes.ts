@@ -12,9 +12,10 @@ import {AuthComponent} from "./auth/auth.component";
 import {TocComponent} from "./read/toc/toc.component";
 import {ReadComponent} from "./read/read/read.component";
 import {AuthGuard} from "./auth/auth.guard";
-import {EditComponent} from "./hymnal/edit/edit.component";
+import {EditHymnalComponent} from "./hymnal/edit-hymnal/edit-hymnal.component";
 import {BibleComponent} from "./bible/bible.component";
 import {SsqComponent} from "./ssq/ssq.component";
+import {EditHymnComponent} from "./hymnal/edit-hymn/edit-hymn.component";
 
 export const appRoutes: Routes = [
   //
@@ -44,17 +45,19 @@ export const appRoutes: Routes = [
     path: 'synch',
     component: SynchSelectComponent,
     data: {title: 'Synch Writings'},
+    canActivate: [AuthGuard],
   },
   {
     path: 'synch/:translation',
     component: SynchComponent,
     data: {title: 'Synch Writings'},
+    canActivate: [AuthGuard],
   },
   {
     path: 'synch/:translation/:page',
     component: SynchComponent,
     data: {title: 'Synch Writings'},
-    // canActivate: [AuthGuard],
+    canActivate: [AuthGuard],
     /*
     children: [
       {
@@ -103,9 +106,31 @@ export const appRoutes: Routes = [
     canActivate: [AuthGuard],
     children: [
       {
+        path: ':hymnal',
+        component: EditHymnComponent,
+        data: {title: 'Edit Hymn'}
+      },
+      {
         path: ':hymnal/:no',
-        component: EditComponent,
-        data: {title: 'Edit Component'}
+        component: EditHymnComponent,
+        data: {title: 'Edit Hymn'}
+      },
+    ]
+
+  },
+  {
+    path: 'edit/hymnal',
+    canActivate: [AuthGuard],
+    children: [
+      {
+        path: '',
+        component: EditHymnalComponent,
+        data: {title: 'Edit Hymnal'}
+      },
+      {
+        path: ':hymnal',
+        component: EditHymnalComponent,
+        data: {title: 'Edit Hymnal'}
       },
     ]
 

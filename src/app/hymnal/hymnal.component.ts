@@ -22,6 +22,10 @@ export class HymnalComponent implements OnInit {
   hymnalMetadata: Hymnal = new Hymnal();
   hymnal: Array<Hymn>;
 
+  canEdit() {
+    return this.hymnalService.canEditHymnal();
+  }
+
   getHymnalMetadata(slug) {
     this.hymnalService
       .getHymnalMetadata(slug)
@@ -43,6 +47,10 @@ export class HymnalComponent implements OnInit {
 
   getHymnUrl(hymn: Hymn): string {
     return '/' + AppSettings.HYMN_API_URI + hymn.slug + '/' + hymn.hymn_no;
+  }
+
+  getHymnEditUrl(slug: string, hymnNo = null): string {
+    return '/edit/' + AppSettings.HYMN_API_URI + slug + '/' + (hymnNo ? hymnNo : '');
   }
 
   ngOnInit() {

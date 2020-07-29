@@ -1,4 +1,5 @@
 export class Hymnal {
+  id?: number | null | undefined;
   title: string;
   publisher: string;
   year: string;

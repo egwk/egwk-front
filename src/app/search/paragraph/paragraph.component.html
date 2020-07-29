@@ -1,10 +1,13 @@
 <ng-container *ngIf="paragraph">
-<span
+  <span
   class="egwk-search-result-book-year"
   *ngIf="paragraph.year"
->({{paragraph.year}}) </span>
+  >({{paragraph.year}}) </span>
+  <a target="new"
+     [href]="'https://m.egwwritings.org/en/book/' + paragraph.para_id">
   <span class="egwk-search-result-book-title"
         [innerHTML]="paragraph.book_title | striphtml"></span>
+  </a>
   <ng-container *ngIf="paragraph.chapter_title">,
     <span class="egwk-search-result-chapter-title"
           [innerHTML]="paragraph.chapter_title | striphtml"></span>
@@ -34,7 +37,8 @@
             class="egwk-search-result-content"
             [innerHTML]="diffHtml(parent.content | striphtml, paragraph.content | striphtml) | showDel:settings.showDeletions | highlightText:currentQuery"
       ></span>
-      <span class="egwk-refcode">{{ ' [' + paragraph.para_id + ']' }} {{ ' {' + paragraph.refcode_short + '}' }}</span>
+      <span class="egwk-refcode">[<a target="new"
+                                     [href]="'https://m.egwwritings.org/en/book/' + paragraph.para_id">{{paragraph.para_id}}</a>] {{ ' {' + paragraph.refcode_short + '}' }}</span>
     </p>
     <p
       [ngClass]="{
@@ -45,9 +49,15 @@
       <mat-tab-group>
         <mat-tab
           *ngFor="let tr_paragraph of paragraph.translations"
-          [label]="tr_paragraph.publisher + ', ' + tr_paragraph.year + '.'"
+          [label]="tr_paragraph.publisher_name + ', ' + tr_paragraph.year + '.'"
         >
           <span [innerHTML]="tr_paragraph.content | highlightText:currentQuery"></span>
+          <a
+            class="egwk-search-tools-button"
+            target="_blank"
+            [routerLink]="'/chapter/' + paragraph.parent_3 + '/' + tr_paragraph.lang+ '/' + tr_paragraph.publisher+ '/' + tr_paragraph.year + '/' + tr_paragraph.no ">
+            <mat-icon>chevron_right</mat-icon>
+          </a>
         </mat-tab>
       </mat-tab-group>
     </p>

@@ -11,7 +11,7 @@ export const environment = {
   as3rdpClientSecret: "as3rdpClientSecret",
   as3rdpRedirectUri: 'http://localhost:4201/auth/callback',
   clientId: 2,
-  clientSecret: "clientSecret",
+  clientSecret: "YgKleZZVER2x4Pd1d0U9t4JhUJU6u0AG69UlHSZE",
   redirectUri: 'http://localhost:4201/auth/callback',
 };
 

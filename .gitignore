@@ -5,6 +5,10 @@
 /www
 /tmp
 /out-tsc
+/out-tsc
+
+# not yet added
+/src/assets/images/hymnals
 
 # backup
 /backup

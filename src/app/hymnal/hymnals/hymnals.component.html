@@ -1,5 +1,16 @@
 <div class="full-height flex-wrap egwk-hymnals top-padding" *ngIf="hymnals; else loading">
 
+  <breadcrumbs [items]="[
+      {title: 'Home', uri: '/', icon: 'home'},
+      {title: 'Hymnals'},
+      {
+       condition: canEdit(),
+       icon: 'add',
+       uri: '/edit/hymnal/',
+       alt: 'Add Hymnal'
+      }
+  ]"></breadcrumbs>
+
   <div class="egwk-hymnal-list-wrapper">
     <div class="egwk-hymnal-item" [routerLink]="getHymnalUrl(hymnal)" *ngFor="let hymnal of hymnals">
       <p class="egwk-hymnal-item-title">{{ hymnal.title }}</p>
